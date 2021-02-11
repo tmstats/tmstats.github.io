@@ -153,7 +153,7 @@ if (document.getElementById(name) == null){
 
 		// EXTRACT VALUE FOR HTML HEADER. 
         // ('Book ID', 'Book Name', 'Category' and 'Price')
-        var col = ["Pseudo","Used since"];
+        var col = ["Pseudo","Using since"];
         
 
 
