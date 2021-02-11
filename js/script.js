@@ -1,4 +1,13 @@
 
+$.getJSON('https://trackmaniastats.herokuapp.com/api/totalPlayer', function(json) {
+      
+        var p = document.getElementById("totalPlayer");
+        p.innerHTML = json.totalPlayer;
+
+});
+
+
+
 
 function wait(playerID){
 $.getJSON('https://trackmaniastats.herokuapp.com/api/playerProfiles/'.concat(playerID), function(data) {
@@ -14,9 +23,16 @@ $.getJSON('https://trackmaniastats.herokuapp.com/api/playerProfiles/'.concat(pla
 }
 
 
+
 function searchPlayer(){
 string  = document.getElementById("fname").value; 
 $.getJSON('https://trackmaniastats.herokuapp.com/api/searchPlayer/'.concat(string), function(json) {
+
+		var p = document.getElementById("numberofresult");
+		var count = 0;
+		for (k in json) if (json.hasOwnProperty(k)) count++;
+		string =  count + " player(s) found"
+        p.innerHTML = string;
 
 		CreateTableFromJSON(json);
     });
@@ -132,7 +148,7 @@ $.getJSON(URL, function(json) {
 
 
 		//console.log(json); 
-        console.log(col); 
+        //console.log(col); 
 
 
         // CREATE DYNAMIC TABLE.
