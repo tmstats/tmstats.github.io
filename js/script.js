@@ -189,7 +189,7 @@ $.getJSON(URL, function(json) {
 
 
                 var h3 = document.createElement("h3")
-		h3.innerHTML ="CotD results:"
+		h3.innerHTML ="<br>CotD results:"
 		h3.setAttribute("style", "text-decoration: underline;");
 		$(document.getElementById("playerProfile").appendChild(h3))
 
