@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>TrackmaniaStats</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  </head>
+
+  <body>
+  
+    <div class="mypanel"></div>
+
+
+    <script>
+    $.getJSON('https://trackmaniastats.herokuapp.com/api/playerProfiles/cbdc1eec-949a-4650-93a2-eab26c297531', function(data) {
+        $(".mypanel").html(data);
+    });
+    </script>
+    
+  </body>
+
+
+
+  
+  
+</html>
