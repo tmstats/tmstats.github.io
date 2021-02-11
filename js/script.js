@@ -93,7 +93,12 @@ function CreateTableFromJSON(json) {
 
 function seeProfile(){
 	alert("WIP")
+	$(".playerProfile").html(text);
 }
+
+
+
+
 
 
 $(document).ready(function() {
