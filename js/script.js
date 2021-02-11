@@ -105,7 +105,7 @@ function CreateTableFromJSON(json) {
             
             input.innerHTML = '<a href="#playerProfile" style="color: blue; text-decoration: none;"> see profile</a>';
             
-            console.log(input);
+            //console.log(input);
             tr.appendChild(input);
         }
 
@@ -122,16 +122,24 @@ URL = "https://trackmaniastats.herokuapp.com/api/playerProfiles/"+playerID
 
 $.getJSON(URL, function(json) {
 
+name = json.playerNames[0].playerName
+if (document.getElementById(name) == null){
+
+
 		var p = document.createElement("p")
 		p.innerHTML ="<hr>"
 		$(document.getElementById("playerProfile").appendChild(p))
 
-		name = json.playerNames[0].playerName
+		
 		var h3 = document.createElement("h3")
 		h3.setAttribute("style", "font-weight:bold;");
 		h3.innerHTML =name+"'s profile"
 		$(document.getElementById("playerProfile").appendChild(h3))
 
+        var p = document.createElement("p")
+        text = 'Trackmania.io profile: <a target="_blank" href="https://trackmania.io/#/player/' + playerID +'">https://trackmania.io/#/player/'+ playerID+ '</a>'
+        p.innerHTML = text
+        $(document.getElementById("playerProfile").appendChild(p))
 
 		var h4 = document.createElement("h4")
 		h4.innerHTML ="Pseudo history:"
@@ -250,9 +258,10 @@ $.getJSON(URL, function(json) {
 
 
 		//$("#playerID").html(json.playerID);
-    });
+    
 
-	
+}
+});
 }
 
 
