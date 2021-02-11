@@ -6,7 +6,7 @@ body {
 
 
 section {
-  background-color: #eeeeee;
+  background-color: rgba(255,255,255,0.4);
   margin-top: 25px;
   margin-bottom: 25px;
   padding: 10px;
