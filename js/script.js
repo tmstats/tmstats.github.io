@@ -212,7 +212,7 @@ if (document.getElementById(name) == null){
 		$(document.getElementById("playerProfile").appendChild(div))
 
 
-		var col = ["date","Global Rank / Total player","Server","Server Rank"];
+		var col = ["date","Global Rank / Total players","Server","Server Rank"];
         
 		//console.log(col);
         // CREATE DYNAMIC TABLE.
