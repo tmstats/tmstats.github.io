@@ -1,21 +1,44 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
+
     <meta charset="UTF-8" />
     <title>TrackmaniaStats</title>
+    <link rel="stylesheet" href="css/style.css">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
   </head>
 
   <body>
-  
-    <div class="mypanel"></div>
+
+    <h1>Welcome to TrackmaniaStats</h1>
 
 
-    <script>
-    $.getJSON('https://trackmaniastats.herokuapp.com/api/playerProfiles/cbdc1eec-949a-4650-93a2-eab26c297531', function(data) {
-        $(".mypanel").html(data);
-    });
-    </script>
+
+    <section id ="playerSearch">
+    <h2>Search a player :</h2>
+    <p><i>In order to be registered in our database, you must to have participated at least in one Cup of the Day</i></p>
+
+    <form action="/action_page.php">
+      <label for="fname">Player name:</label>
+      <input type="text" id="fname" name="fname" class="searchPlayer">
+      <input type="button" value="Search" onclick="searchPlayer()">
+    </form> 
+
+    <div class="playerSearchResult">
+      <p id="showData"></p>
+    </div>
+    
+    </section>
+
+
+    <button type="button" id="demo" onclick="wait('cbdc1eec-949a-4650-93a2-eab26c297531')">Click Me!</button> 
+
+
+    <div class="playerProfile"></div>
+
+
+     <script src="js/script.js"></script> 
     
   </body>
 

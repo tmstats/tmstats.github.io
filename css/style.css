@@ -1,0 +1,39 @@
+#playerSearch {
+  background-color: #eeeeee;
+}
+
+h1 {
+    text-align:center;
+}
+
+
+        th, td, p, input {
+            font:14px Verdana;
+        }
+        table, th, td 
+        {
+            border: solid 1px #555;
+            border-collapse: collapse;
+            padding: 2px 3px;
+            text-align: center;
+            background-color: #e0e0e0;
+        }
+        th {
+            font-weight:bold;
+        }
+
+table{
+	width:40%;
+}
+
+
+.profileButton{
+	width: 100%; 
+	height: 100%;
+	
+}
+
+.profileButton:hover{
+	background-color: lightgreen;
+	cursor: pointer;
+}
