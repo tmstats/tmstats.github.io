@@ -128,12 +128,6 @@ $.getJSON(URL, function(json) {
 		h3.innerHTML =name+"'s profile"
 		$(document.getElementById("playerProfile").appendChild(h3))
 
-		var h3 = document.createElement("h3")
-		h3.innerHTML ="CotD results:"
-		h3.setAttribute("style", "text-decoration: underline;");
-		
-		$(document.getElementById("playerProfile").appendChild(h3))
-
 
 		var h4 = document.createElement("h4")
 		h4.innerHTML ="Pseudo history:"
@@ -194,10 +188,10 @@ $.getJSON(URL, function(json) {
         divContainer.appendChild(table);
 
 
-
-        var h4 = document.createElement("h4")
-		h4.innerHTML ="<br>Player's COTD results:"
-		$(document.getElementById("playerProfile").appendChild(h4))
+                var h3 = document.createElement("h3")
+		h3.innerHTML ="CotD results:"
+		h3.setAttribute("style", "text-decoration: underline;");
+		$(document.getElementById("playerProfile").appendChild(h3))
 
 
         var div = document.createElement("div")
