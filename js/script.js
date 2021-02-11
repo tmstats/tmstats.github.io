@@ -70,16 +70,21 @@ function CreateTableFromJSON(json) {
             td.innerHTML = json[col[i]];
             tr.appendChild(td);
 
-            var td = document.createElement("td");
-
             var input = document.createElement("td"); 
             input.type = "button";
             input.value = "see profile";
             input.setAttribute("class", "profileButton");
-            input.setAttribute("onclick", "seeProfile()");
+            
+
+            path = "seeProfile('"+json[col[i]]+"')"
+            //console.log(path); 
+            input.setAttribute("onclick", path);
             //input.onclick = seeProfile(json[col[i]]);
-            //td.appendChild(input);
+            var a = document.createElement("a"); 
+            a.setAttribute("href", "#playerProfile");
+            
             input.innerHTML = "see profile";
+            input.appendChild(a);
             tr.appendChild(input);
         }
 
@@ -91,9 +96,144 @@ function CreateTableFromJSON(json) {
 
 
 
-function seeProfile(){
-	alert("WIP")
-	$(".playerProfile").html(text);
+function seeProfile(playerID){
+URL = "https://trackmaniastats.herokuapp.com/api/playerProfiles/"+playerID
+
+$.getJSON(URL, function(json) {
+
+		var p = document.createElement("p")
+		p.innerHTML ="<hr>"
+		$(document.getElementById("playerProfile").appendChild(p))
+
+		name = json.playerNames[0].playerName
+		var h3 = document.createElement("h3")
+		h3.innerHTML =name+"'s profile"
+		$(document.getElementById("playerProfile").appendChild(h3))
+
+		var h3 = document.createElement("h3")
+		h3.innerHTML ="CotD results:"
+		$(document.getElementById("playerProfile").appendChild(h3))
+
+
+		var h4 = document.createElement("h4")
+		h4.innerHTML ="Pseudo history:"
+		$(document.getElementById("playerProfile").appendChild(h4))
+
+
+		var div = document.createElement("div")
+		div.setAttribute("id", "playerNames");
+		$(document.getElementById("playerProfile").appendChild(div))
+
+
+		// EXTRACT VALUE FOR HTML HEADER. 
+        // ('Book ID', 'Book Name', 'Category' and 'Price')
+        var col = ["Pseudo","Used since"];
+        
+
+
+		//console.log(json); 
+        console.log(col); 
+
+
+        // CREATE DYNAMIC TABLE.
+        var table = document.createElement("table");
+
+        // CREATE HTML TABLE HEADER ROW USING THE EXTRACTED HEADERS ABOVE.
+
+        // TABLE ROW.
+        	var tr = table.insertRow(-1); 
+
+        	var th = document.createElement("th");      // TABLE HEADER.
+        	th.innerHTML = "Pseudo";
+        	tr.appendChild(th);
+
+        	var th = document.createElement("th");      // TABLE HEADER.
+        	th.innerHTML = "Used since";
+        	tr.appendChild(th);
+
+
+        
+        
+        for (var i = 0; i < json.playerNames.length; i++) {
+
+        	var tr = table.insertRow(-1);  
+            var td = document.createElement("td");    
+            //console.log(json.playerNames[i]); 
+            td.innerHTML = json.playerNames[i].playerName;
+            tr.appendChild(td);
+
+            var td = document.createElement("td");      // TABLE HEADER.
+            td.innerHTML = json.playerNames[i].sinceDate;
+            tr.appendChild(td);
+
+        }
+
+        // FINALLY ADD THE NEWLY CREATED TABLE WITH JSON DATA TO A CONTAINER.
+        var divContainer = document.getElementById("playerNames");
+        divContainer.innerHTML = "";
+        divContainer.appendChild(table);
+
+
+
+        var h4 = document.createElement("h4")
+		h4.innerHTML ="<br>Player's COTD results:"
+		$(document.getElementById("playerProfile").appendChild(h4))
+
+
+        var div = document.createElement("div")
+		div.setAttribute("id", "cotdResults");
+		$(document.getElementById("playerProfile").appendChild(div))
+
+
+		var col = ["date","Global Rank / Total player","Server","Server Rank"];
+        
+		//console.log(col);
+        // CREATE DYNAMIC TABLE.
+        var table = document.createElement("table");
+
+        // CREATE HTML TABLE HEADER ROW USING THE EXTRACTED HEADERS ABOVE.
+
+        // TABLE ROW.
+        	var tr = table.insertRow(-1); 
+
+        	for (var i = 0; i < col.length; i++) {
+        	var th = document.createElement("th");      // TABLE HEADER.
+        	th.innerHTML = col[i];
+        	tr.appendChild(th);
+        }
+
+
+		for (var i = 0; i < json.results.cotd.length; i++) {
+
+        	var tr = table.insertRow(-1);  
+
+            var td = document.createElement("td");    
+            td.innerHTML = json.results.cotd[i].date;
+            tr.appendChild(td);
+
+            var td = document.createElement("td");    
+            td.innerHTML = json.results.cotd[i].globalRank +" / " + json.results.cotd[i].totalPlayer ;
+            tr.appendChild(td);
+
+            var td = document.createElement("td");    
+            td.innerHTML = json.results.cotd[i].server;
+            tr.appendChild(td);
+
+            var td = document.createElement("td");    
+            td.innerHTML = json.results.cotd[i].serverRank;
+            tr.appendChild(td);
+
+        }
+
+        var divContainer = document.getElementById("cotdResults");
+        divContainer.innerHTML = "";
+        divContainer.appendChild(table);
+
+
+		//$("#playerID").html(json.playerID);
+    });
+
+	
 }
 
 
