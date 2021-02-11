@@ -122,7 +122,7 @@ URL = "https://trackmaniastats.herokuapp.com/api/playerProfiles/"+playerID
 
 $.getJSON(URL, function(json) {
 
-name = json.playerNames[0].playerName
+name = json.playerNames[json.playerNames.length - 1].playerName
 if (document.getElementById(name) == null){
 
 
