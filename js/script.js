@@ -87,6 +87,7 @@ function CreateTableFromJSON(json) {
             tr.appendChild(td);
 
             var input = document.createElement("td"); 
+
             input.type = "button";
             input.value = "see profile";
             input.setAttribute("class", "profileButton");
@@ -96,11 +97,11 @@ function CreateTableFromJSON(json) {
             //console.log(path); 
             input.setAttribute("onclick", path);
             //input.onclick = seeProfile(json[col[i]]);
-            var a = document.createElement("a"); 
-            a.setAttribute("href", "#playerProfile");
+
             
-            input.innerHTML = "see profile";
-            input.appendChild(a);
+            input.innerHTML = '<a href="#playerProfile" style="color: blue; text-decoration: none;"> see profile</a>';
+            
+            console.log(input);
             tr.appendChild(input);
         }
 
@@ -123,11 +124,14 @@ $.getJSON(URL, function(json) {
 
 		name = json.playerNames[0].playerName
 		var h3 = document.createElement("h3")
+		h3.setAttribute("style", "font-weight:bold;");
 		h3.innerHTML =name+"'s profile"
 		$(document.getElementById("playerProfile").appendChild(h3))
 
 		var h3 = document.createElement("h3")
 		h3.innerHTML ="CotD results:"
+		h3.setAttribute("style", "text-decoration: underline;");
+		
 		$(document.getElementById("playerProfile").appendChild(h3))
 
 
@@ -137,7 +141,7 @@ $.getJSON(URL, function(json) {
 
 
 		var div = document.createElement("div")
-		div.setAttribute("id", "playerNames");
+		div.setAttribute("id", name);
 		$(document.getElementById("playerProfile").appendChild(div))
 
 
@@ -185,7 +189,7 @@ $.getJSON(URL, function(json) {
         }
 
         // FINALLY ADD THE NEWLY CREATED TABLE WITH JSON DATA TO A CONTAINER.
-        var divContainer = document.getElementById("playerNames");
+        var divContainer = document.getElementById(name);
         divContainer.innerHTML = "";
         divContainer.appendChild(table);
 
@@ -197,7 +201,8 @@ $.getJSON(URL, function(json) {
 
 
         var div = document.createElement("div")
-		div.setAttribute("id", "cotdResults");
+        id = "cotdResults" + name
+		div.setAttribute("id", id);
 		$(document.getElementById("playerProfile").appendChild(div))
 
 
@@ -241,7 +246,7 @@ $.getJSON(URL, function(json) {
 
         }
 
-        var divContainer = document.getElementById("cotdResults");
+        var divContainer = document.getElementById(id);
         divContainer.innerHTML = "";
         divContainer.appendChild(table);
 
