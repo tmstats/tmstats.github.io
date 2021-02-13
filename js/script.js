@@ -6,6 +6,37 @@ $.getJSON('https://trackmaniastats.herokuapp.com/api/totalPlayer', function(json
 
 });
 
+
+$.getJSON('https://trackmaniastats.herokuapp.com/api/numberNewCOTDPlayers', function(json) {
+      
+        var p = document.getElementById("newPlayers");
+        p.innerHTML = json.numberNewCOTDPlayers;
+
+});
+
+$.getJSON('https://trackmaniastats.herokuapp.com/api/newCOTDPlayers', function(json) {
+      
+        var section = document.getElementById("FunFacts");
+        var p = document.createElement("p");
+
+        p.innerHTML = "Please welcome: "
+
+
+        for (var i = 0; i < Object.keys(json).length; i++) {
+            console.log("yes")
+            if ((i)  == (Object.keys(json).length-1)){
+                p.innerHTML = p.innerHTML + "and " + String(Object.keys(json)[i]) +"."
+            }else{
+            p.innerHTML = p.innerHTML + String(Object.keys(json)[i] +", ")
+            }
+
+        }
+
+        section.appendChild(p);
+
+});
+
+
 var hashParams = window.location.hash.substr(1).split('&'); // substr(1) to remove the `#`
 for(var i = 0; i < hashParams.length; i++){
     var p = hashParams[i].split('=');
