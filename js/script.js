@@ -9,7 +9,7 @@ $.getJSON('https://trackmaniastats.herokuapp.com/api/totalPlayer', function(json
 
 $.getJSON('https://trackmaniastats.herokuapp.com/api/numberNewCOTDPlayers', function(json) {
       
-        var p = document.getElementById("newPlayers");
+        var p = document.getElementById("numberNewPlayers");
         p.innerHTML = json.numberNewCOTDPlayers;
 
 });
@@ -17,13 +17,14 @@ $.getJSON('https://trackmaniastats.herokuapp.com/api/numberNewCOTDPlayers', func
 $.getJSON('https://trackmaniastats.herokuapp.com/api/newCOTDPlayers', function(json) {
       
         var section = document.getElementById("FunFacts");
-        var p = document.createElement("p");
+        var p = document.getElementById("newPlayers");
+        //var p = document.createElement("p");
 
         p.innerHTML = "Please welcome: "
 
 
         for (var i = 0; i < Object.keys(json).length; i++) {
-            console.log("yes")
+            //console.log("yes")
             if ((i)  == (Object.keys(json).length-1)){
                 p.innerHTML = p.innerHTML + "and " + String(Object.keys(json)[i]) +"."
             }else{
@@ -37,11 +38,7 @@ $.getJSON('https://trackmaniastats.herokuapp.com/api/newCOTDPlayers', function(j
 });
 
 
-var hashParams = window.location.hash.substr(1).split('&'); // substr(1) to remove the `#`
-for(var i = 0; i < hashParams.length; i++){
-    var p = hashParams[i].split('=');
-    document.getElementById(p[0]).value = decodeURIComponent(p[1]);;
-}
+
 
 
 function wait(playerID){
@@ -156,31 +153,46 @@ $.getJSON(URL, function(json) {
 name = json.playerNames[json.playerNames.length - 1].playerName
 if (document.getElementById(name) == null){
 
+        var playerdiv = document.createElement("div")
+        playerdiv.setAttribute("id", name);
 
 		var p = document.createElement("p")
-		p.innerHTML ="<hr>"
-		$(document.getElementById("playerProfile").appendChild(p))
+        if (document.getElementById('playerProfile').children.length > 0) {
+            console.log("yo")
+            console.log(document.getElementById('playerProfile').children.length)
+            p.innerHTML ="<hr>"
+        }
 
+        else{
+            console.log("hi")
+            p.innerHTML =""
+        }
+		
+		//$(document.getElementById("playerProfile").appendChild(p))
+        playerdiv.appendChild(p)
 		
 		var h3 = document.createElement("h3")
 		h3.setAttribute("style", "font-weight:bold;");
 		h3.innerHTML =name+"'s profile"
-		$(document.getElementById("playerProfile").appendChild(h3))
+		//$(document.getElementById("playerProfile").appendChild(h3))
+        playerdiv.appendChild(h3)
 
         var p = document.createElement("p")
         text = 'Trackmania.io profile: <a target="_blank" href="https://trackmania.io/#/player/' + playerID +'">https://trackmania.io/#/player/'+ playerID+ '</a>'
         p.innerHTML = text
-        $(document.getElementById("playerProfile").appendChild(p))
+        //$(document.getElementById("playerProfile").appendChild(p))
+        playerdiv.appendChild(p)
 
 		var h4 = document.createElement("h4")
 		h4.innerHTML ="Pseudo history:"
-		$(document.getElementById("playerProfile").appendChild(h4))
-
+		//$(document.getElementById("playerProfile").appendChild(h4))
+        playerdiv.appendChild(h4)
 
 		var div = document.createElement("div")
-		div.setAttribute("id", name);
-		$(document.getElementById("playerProfile").appendChild(div))
-
+        profilepath = name+"Profile"
+		div.setAttribute("id", profilepath);
+		//$(document.getElementById("playerProfile").appendChild(div))
+        playerdiv.appendChild(div)
 
 		// EXTRACT VALUE FOR HTML HEADER. 
         // ('Book ID', 'Book Name', 'Category' and 'Price')
@@ -226,22 +238,25 @@ if (document.getElementById(name) == null){
         }
 
         // FINALLY ADD THE NEWLY CREATED TABLE WITH JSON DATA TO A CONTAINER.
-        var divContainer = document.getElementById(name);
-        divContainer.innerHTML = "";
-        divContainer.appendChild(table);
+        //var divContainer = document.getElementById(profilepath);
+        //divContainer.innerHTML = "";
+        div.appendChild(table);
 
 
-                var h3 = document.createElement("h3")
-		h3.innerHTML ="<br>CotD results:"
+        var h3 = document.createElement("h3")
+        
+
+        h3.innerHTML ="<br>CotD results:"
+
 		h3.setAttribute("style", "text-decoration: underline;");
-		$(document.getElementById("playerProfile").appendChild(h3))
-
+		//$(document.getElementById("playerProfile").appendChild(h3))
+        playerdiv.appendChild(h3)
 
         var div = document.createElement("div")
         id = "cotdResults" + name
 		div.setAttribute("id", id);
-		$(document.getElementById("playerProfile").appendChild(div))
-
+		//$(document.getElementById("playerProfile").appendChild(div))
+        playerdiv.appendChild(div)
 
 		var col = ["date","Global Rank / Total players","Server","Server Rank"];
         
@@ -283,10 +298,16 @@ if (document.getElementById(name) == null){
 
         }
 
-        var divContainer = document.getElementById(id);
-        divContainer.innerHTML = "";
-        divContainer.appendChild(table);
+        //var divContainerr = document.getElementById(id);
+        //divContainerr.innerHTML = "";
+        div.appendChild(table);
 
+        playerdiv.appendChild(div)
+
+        $(document.getElementById("playerProfile").appendChild(playerdiv))
+
+        path = "#"+name
+        window.location.href = path ;
 
 		//$("#playerID").html(json.playerID);
     
