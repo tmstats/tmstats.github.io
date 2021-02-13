@@ -22,13 +22,19 @@ $.getJSON('https://trackmaniastats.herokuapp.com/api/newCOTDPlayers', function(j
 
         p.innerHTML = "Please welcome: "
 
+        var result = [];
 
-        for (var i = 0; i < Object.keys(json).length; i++) {
+        for(var i in json)
+            result.push([i, json[i]]);
+
+        console.log(result[0][0])
+
+        for (var i = 0; i < result.length; i++) {
             //console.log("yes")
-            if ((i)  == (Object.keys(json).length-1)){
-                p.innerHTML = p.innerHTML + "and " + String(Object.keys(json)[i]) +"."
+            if ((i)  == (result.length-1)){
+                p.innerHTML = p.innerHTML + "and " + String(result[i][0]) +"."
             }else{
-            p.innerHTML = p.innerHTML + String(Object.keys(json)[i] +", ")
+            p.innerHTML = p.innerHTML + String(result[i][0] +", ")
             }
 
         }
