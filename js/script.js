@@ -158,13 +158,13 @@ if (document.getElementById(name) == null){
 
 		var p = document.createElement("p")
         if (document.getElementById('playerProfile').children.length > 0) {
-            console.log("yo")
-            console.log(document.getElementById('playerProfile').children.length)
+            //console.log("yo")
+            //console.log(document.getElementById('playerProfile').children.length)
             p.innerHTML ="<hr>"
         }
 
         else{
-            console.log("hi")
+            //console.log("hi")
             p.innerHTML =""
         }
 		
@@ -222,9 +222,12 @@ if (document.getElementById(name) == null){
 
 
         
-        
-        for (var i = 0; i < json.playerNames.length; i++) {
-
+        o = json.playerNames.length -1 
+        //console.log(o)
+        for (var i = o; i >= 0; i--) {
+            console.log("here")
+            console.log(i)
+            //console.log("1")
         	var tr = table.insertRow(-1);  
             var td = document.createElement("td");    
             //console.log(json.playerNames[i]); 
@@ -275,8 +278,8 @@ if (document.getElementById(name) == null){
         	tr.appendChild(th);
         }
 
-
-		for (var i = 0; i < json.results.cotd.length; i++) {
+        u = json.results.cotd.length-1
+		for (var i = u; i >= 0; i--) {
 
         	var tr = table.insertRow(-1);  
 
