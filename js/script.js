@@ -1,4 +1,30 @@
 
+//setup before functions
+var typingTimer;                //timer identifier
+var doneTypingInterval = 100;  //time in ms, 5 second for example
+var $input = $('#player');
+
+//on keyup, start the countdown
+$input.on('keyup', function () {
+    var p = document.getElementById("player");
+    p = p.value.length
+    console.log(p)
+    if (p>2){
+          clearTimeout(typingTimer);
+        typingTimer = setTimeout(searchPlayer, doneTypingInterval);
+    }
+
+});
+
+//on keydown, clear the countdown 
+$input.on('keydown', function () {
+  clearTimeout(typingTimer);
+});
+
+
+
+
+
 $.getJSON('https://trackmaniastats.herokuapp.com/api/totalPlayer', function(json) {
       
         var p = document.getElementById("totalPlayer");
@@ -14,36 +40,72 @@ $.getJSON('https://trackmaniastats.herokuapp.com/api/numberNewCOTDPlayers', func
 
 });
 
+function showNewPlayers(){
 $.getJSON('https://trackmaniastats.herokuapp.com/api/newCOTDPlayers', function(json) {
       
-        var section = document.getElementById("FunFacts");
+        //var section = document.getElementById("FunFacts");
         var p = document.getElementById("newPlayers");
         //var p = document.createElement("p");
 
-        p.innerHTML = "Please welcome: "
+        p.innerHTML = "<b>Please welcome: </b>"
 
         var result = [];
 
-        for(var i in json)
+        for(var i in json){
             result.push([i, json[i]]);
+        }
 
-        console.log(result[0][0])
+        //console.log(result[0][0])
 
         for (var i = 0; i < result.length; i++) {
             //console.log("yes")
             if ((i)  == (result.length-1)){
-                p.innerHTML = p.innerHTML + "and " + String(result[i][0]) +"."
+                p.innerHTML = p.innerHTML + String(result[i][0]) +"."
             }else{
-            p.innerHTML = p.innerHTML + String(result[i][0] +", ")
+            p.innerHTML = p.innerHTML + String(result[i][0] +" // ")
             }
 
         }
 
-        section.appendChild(p);
+        //section.appendChild(p);
+
+});
+}
+
+$.getJSON('https://trackmaniastats.herokuapp.com/api/numberNewNamePlayers', function(json) {
+      
+        var p = document.getElementById("numberNewNamePlayers");
+        p.innerHTML = json.numberNewNamePlayers;
 
 });
 
+function showNewNamePlayers(){
+$.getJSON('https://trackmaniastats.herokuapp.com/api/newNamePlayers', function(json) {
+      
+        //var section = document.getElementById("FunFacts");
+        var p = document.getElementById("newNamePlayers");
+        //var p = document.createElement("p");
 
+        p.innerHTML = "<b>OLD  → NEW : </b>"
+
+        var result = [];
+
+        for(var i in json){
+            result.push([i, json[i]]);
+        }
+
+        for (var i = 0; i < result.length; i++) {
+            if ((i)  == (result.length-1)){
+                p.innerHTML = p.innerHTML + "and " + String(result[i][1]) +" → " + String(result[i][0]) + "."
+            }else{
+            p.innerHTML = p.innerHTML + String(result[i][1]) +" → " + String(result[i][0]) + " // "
+            }
+
+        }
+
+
+});
+}
 
 
 
@@ -161,6 +223,7 @@ if (document.getElementById(name) == null){
 
         var playerdiv = document.createElement("div")
         playerdiv.setAttribute("id", name);
+        playerdiv.setAttribute("class", 'players');
 
 		var p = document.createElement("p")
         if (document.getElementById('playerProfile').children.length > 0) {

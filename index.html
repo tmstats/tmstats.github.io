@@ -26,11 +26,14 @@
     </section>
 
     <section id ="FunFacts">
-        <i><h2 style="text-decoration: underline">Fun Facts</h2></i>
-        <p>On the last Cup of the Day, we had <i id="numberNewPlayers"></i> new players for whom it was their first one.</p>
-        <p id="newPlayers">fill</p>
-
-
+        <h2 style="text-decoration: underline">Fun Facts</h2>
+        <i><h3>New COTD Players</h3></i>
+        <p>On the last Cup of the Day, we had <i id="numberNewPlayers">f5</i> new players that had never played one before.</p>
+        <p id="newPlayers" class="button_cont"> <a class="example_f" onclick="showNewPlayers()" rel="nofollow"><span>Show new players</a></p>
+        
+        <i><h3>New Player Names</h3></i>
+        <p>On the last Cup of the Day, we had <i id="numberNewNamePlayers">f5</i> players that had changed their nickname since their last COTD.</p>
+        <p id="newNamePlayers" class="button_cont"> <a class="example_f" onclick="showNewNamePlayers()" rel="nofollow"><span>Show players that changed their pseudo</a> </p>
 
 
     </section>
@@ -42,8 +45,10 @@
 
     <form action="/action_page.php">
       <label for="player">Player name:</label>
-      <input type="text" id="player" name="player" class="searchPlayer">
+      <input type="text" id="player" class="player" name="player" class="searchPlayer">
       <input type="button" value="Search" onclick="searchPlayer()">
+      <br>
+      <i>(automatic search for more than 2 characters)</i>
     </form> 
 
     <p id="numberofresult"></p>
