@@ -6,13 +6,8 @@ var $input = $('#player');
 
 //on keyup, start the countdown
 $input.on('keyup', function () {
-    var p = document.getElementById("player");
-    p = p.value.length
-    console.log(p)
-    if (p>2){
           clearTimeout(typingTimer);
         typingTimer = setTimeout(searchPlayer, doneTypingInterval);
-    }
 
 });
 
