@@ -20,6 +20,10 @@ h1 {
     font-style: bold;
 }
 
+h2 {
+    font-weight:bold;
+}
+
 
         th, td, p, input {
             font:14px Verdana;
