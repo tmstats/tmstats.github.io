@@ -1,14 +1,19 @@
 
 //setup before functions
 var typingTimer;                //timer identifier
-var doneTypingInterval = 100;  //time in ms, 5 second for example
+var doneTypingInterval = 50; //time in ms, 5 second for example
 var $input = $('#player');
 
 //on keyup, start the countdown
 $input.on('keyup', function () {
+    entry = document.getElementById("player");
+    //console.log(entry)
+    entry = entry.value.length
+    //console.log(entry)
+    if (entry>1) {
           clearTimeout(typingTimer);
         typingTimer = setTimeout(searchPlayer, doneTypingInterval);
-
+}
 });
 
 //on keydown, clear the countdown 
