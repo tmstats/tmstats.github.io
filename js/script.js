@@ -91,7 +91,7 @@ $.getJSON('https://trackmaniastats.herokuapp.com/api/newNamePlayers', function(j
 
         for (var i = 0; i < result.length; i++) {
             if ((i)  == (result.length-1)){
-                p.innerHTML = p.innerHTML + "and " + String(result[i][1]) +" → " + String(result[i][0]) + "."
+                p.innerHTML = p.innerHTML + String(result[i][1]) +" → " + String(result[i][0]) + "."
             }else{
             p.innerHTML = p.innerHTML + String(result[i][1]) +" → " + String(result[i][0]) + " // "
             }
