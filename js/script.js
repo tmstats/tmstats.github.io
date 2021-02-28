@@ -1,3 +1,35 @@
+var x = window.location.hash;
+p=-1
+newName = []
+for (var i = 0; i < x.length; i++){
+    if (x[i] == "#"){
+       x = x.slice(1)
+       console.log(x) 
+       p+=1
+       newName.push("")
+       console.log(newName)
+    }
+    newName[p] += x[i]
+    
+
+}
+console.log(newName[0])
+
+for (var i = 0; i < newName.length; i++){
+console.log(i)
+console.log(newName[i])
+naame = newName[i]
+$.getJSON('https://trackmaniastats.herokuapp.com/api/searchPlayer/'+naame, function(json) {
+
+        playerID = json[naame.toLowerCase()]
+        seeProfile(playerID)
+
+});
+}
+
+
+
+
 
 //setup before functions
 var typingTimer;                //timer identifier
@@ -204,7 +236,7 @@ function CreateTableFromJSON(json) {
             //input.onclick = seeProfile(json[col[i]]);
 
             
-            input.innerHTML = '<a href="#playerProfile" style="color: blue; text-decoration: none;"> see profile</a>';
+            input.innerHTML = '<a style="color: blue; text-decoration: none;"> see profile</a>';
             
             //console.log(input);
             tr.appendChild(input);
@@ -411,7 +443,11 @@ if (document.getElementById(name) == null){
 
         $(document.getElementById("playerProfile").appendChild(playerdiv))
 
+        //curentLocation = window.location.href 
+        //newLocation = curentLocation + "#"+name
+
         path = "#"+name
+        //path = curentLocation + "#"+name
         window.location.href = path ;
 
         showGraphs(playerID,name)
