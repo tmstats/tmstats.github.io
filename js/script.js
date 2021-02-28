@@ -497,6 +497,7 @@ chart = new CanvasJS.Chart("chartContainer"+name, {
     zoomEnabled: true,
     zoomType: "x",
     theme: "light2",
+
     title: {
         text: "COTDs result history (zoom enabled)"
     },
@@ -506,11 +507,16 @@ chart = new CanvasJS.Chart("chartContainer"+name, {
     },
      axisX:{
         reversed:  true,
+        //testt: testt= "2020-12-10",
+        //viewportMinimum: new Date(testt),
+
     },
     data: [{
         type: "column",
+        indexLabelPlacement: "outside",
+        indexLabelOrientation: "vertical",
         //yValueFormatString: "#th place",
-        toolTipContent: "<b>{y}th place out of {totalPlayer} total Player</b><br>server placement: <b>{serverRank}th</b><br>server division: <b>{server}</b>",
+        toolTipContent: "<b>{y}{addOverall} place out of {totalPlayer} total Player</b><br>server placement: <b>{serverRank}{add}</b><br>server division: <b>{server}</b>",
         color: "{color}",
         dataPoints: dataPoints
     }]
@@ -522,7 +528,7 @@ chart2 = new CanvasJS.Chart("chartContainer2"+name, {
     animationEnabled: true,
     theme: "light2",
     title: {
-        text: "COTDs server Distibution"
+        text: "COTDs server Distribution"
     },
     axisY: {
         title: "Number of times played",
@@ -537,7 +543,7 @@ chart2 = new CanvasJS.Chart("chartContainer2"+name, {
     data: [{
         type: "bar",
         //yValueFormatString: "#th place",
-        toolTipContent: "Average position: <b>{averagePosi}th</b>",
+        toolTipContent: "Average position: <b>{averagePosi}</b>",
         color: "grey",
         dataPoints: dataPoints2
         
@@ -556,25 +562,67 @@ $.getJSON("https://trackmaniastats.herokuapp.com/api/cotdResultsServers/"+player
 function cotdResults(data) {    
     for (var i = 0; i < data.results.cotd.length; i++) {
         serverRank = data.results.cotd[i].serverRank
-        if (serverRank== "DNF"){
-color="rgb(30, 30, 30)"
-}else if (serverRank<=8){
-            color="rgb(0, 200, 20)"
+        
+        indexLabel =  String(serverRank)
+
+        if (serverRank == "DNF"){
+            color="rgb(30, 30, 30)"
+            add = ""
+        }else if (serverRank<=8){
+            color="rgb(0, 200, 00)"
+            
         }else if (serverRank<=24){
             color="rgb(240,190,35)"
         }else if (serverRank<=48){
             color="rgb(192,192,192)"
         }else{
-            color="rgb(196, 156, 70)"
+            color="rgb(236, 156, 70)"
+        }
+        lastDigit = serverRank%10
+
+        if (lastDigit == 3){
+            add = "rd"
+        } else if (lastDigit == 2) {
+            add = "nd"
+        } else if (lastDigit == 1){
+            add = "st"
+        } else if (serverRank != "DNF"){
+            add = "th"
         }
 
+
+        globalRank = data.results.cotd[i].globalRank
+
+        lastDigitOverall = globalRank%10
+
+        if (lastDigitOverall == 3){
+            addOverall = "rd"
+        } else if (lastDigitOverall == 2) {
+            addOverall = "nd"
+        } else if (lastDigitOverall == 1){
+            addOverall = "st"
+        } else if (serverRank != "DNF"){
+            addOverall = "th"
+        }
+
+
+        
+
+        //if (indexLabel != ""){indexLabel += add}
+        
+        test = "2020-12-10"
         dataPoints.push({
             color: color,
             x:  new Date(data.results.cotd[i].date),
             y: data.results.cotd[i].globalRank,
             totalPlayer: data.results.cotd[i].totalPlayer,
             serverRank: serverRank,
-            server: data.results.cotd[i].server
+            server: data.results.cotd[i].server,
+            add: add,
+            addOverall: addOverall,
+            indexLabel: indexLabel,
+            label: "South",
+            test: test
         });
     }
     chart.render(); 
