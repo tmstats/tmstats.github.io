@@ -114,7 +114,6 @@ $.getJSON('https://trackmaniastats.herokuapp.com/api/newNamePlayers', function(j
 }
 
 
-
 function wait(playerID){
 $.getJSON('https://trackmaniastats.herokuapp.com/api/playerProfiles/'.concat(playerID), function(data) {
       
@@ -323,18 +322,39 @@ if (document.getElementById(name) == null){
 
         var h3 = document.createElement("h3")
         
-
         h3.innerHTML ="<br>CotD results:"
 
         h3.setAttribute("style", "text-decoration: underline;");
         //$(document.getElementById("playerProfile").appendChild(h3))
         playerdiv.appendChild(h3)
 
+    
+        var divv = document.createElement("div")
+        divv.setAttribute("style", "height: 370px; max-width: 920px; margin: 0px auto;");
+        id = "chartContainer"
+        divv.setAttribute("id", id);
+        playerdiv.appendChild(divv)
+
+        var divvv = document.createElement("div")
+        divvv.setAttribute("style", "height: 370px; max-width: 920px; margin: 20px auto;");
+        id = "chartContainer2"
+        divvv.setAttribute("id", id);
+        playerdiv.appendChild(divvv)
+
         var div = document.createElement("div")
         id = "cotdResults" + name
         div.setAttribute("id", id);
         //$(document.getElementById("playerProfile").appendChild(div))
         playerdiv.appendChild(div)
+
+
+
+        var p = document.createElement("p")
+        
+        p.innerHTML ="<br>Raw data (old format):"
+        //$(document.getElementById("playerProfile").appendChild(h3))
+        playerdiv.appendChild(p)
+
 
         var col = ["date","Global Rank / Total players","Server","Server Rank"];
         
@@ -381,12 +401,20 @@ if (document.getElementById(name) == null){
         div.appendChild(table);
 
         playerdiv.appendChild(div)
+        //div.setAttribute("display", "none"); 
+        
+        //var divContainerr = document.getElementById(id);
+        //divContainerr.innerHTML = "";
+        //playerdiv.appendChild(divo)
+
+
 
         $(document.getElementById("playerProfile").appendChild(playerdiv))
 
         path = "#"+name
         window.location.href = path ;
 
+        showGraphs(playerID)
         //$("#playerID").html(json.playerID);
     
 
@@ -407,3 +435,111 @@ $(document).ready(function() {
          }
     });
 });
+
+
+
+var chart = null;
+var dataPoints = [];
+var dataPoints2 = [];
+
+function showGraphs(playerID){
+
+chart = new CanvasJS.Chart("chartContainer", {
+    animationEnabled: true,
+    zoomEnabled: true,
+    zoomType: "x",
+    theme: "light2",
+    title: {
+        text: "COTDs results history (try zooming in)"
+    },
+    axisY: {
+        title: "Placements",
+        titleFontSize: 24,
+    },
+     axisX:{
+        reversed:  true,
+    },
+    data: [{
+        type: "column",
+        //yValueFormatString: "#th place",
+        toolTipContent: "<b>{y}th place out of {totalPlayer} total Player</b><br>server placement: <b>{serverRank}th</b><br>server division: <b>{server}</b>",
+        color: "{color}",
+        dataPoints: dataPoints
+    }]
+}
+);
+
+chart2 = new CanvasJS.Chart("chartContainer2", {
+    animationEnabled: true,
+    theme: "light2",
+    title: {
+        text: "COTDs server Distibution"
+    },
+    axisY: {
+        title: "Number of times played",
+        titleFontSize: 24,
+        interval: 1,
+        viewportMinimum: 0,
+    },
+     axisX:{
+        title: "Servers",
+        reversed:  true,
+        interval: 1,
+    },
+    data: [{
+        type: "bar",
+        //yValueFormatString: "#th place",
+        toolTipContent: "Average position: <b>{averagePosi}th</b>",
+        color: "grey",
+        dataPoints: dataPoints2
+        
+    }]
+}
+
+);
+
+
+//$.getJSON("https://trackmaniastats.herokuapp.com/api/dataTest", callback);    
+$.getJSON("https://trackmaniastats.herokuapp.com/api/playerProfiles/"+playerID, cotdResults);    
+
+$.getJSON("https://trackmaniastats.herokuapp.com/api/cotdResultsServers/"+playerID, cotdResultsServers); 
+
+}
+
+
+function cotdResults(data) {    
+    for (var i = 0; i < data.results.cotd.length; i++) {
+        serverRank = data.results.cotd[i].serverRank
+        if (serverRank<=8){
+            color="rgb(40, 160, 0)"
+        }else if (serverRank<=24){
+            color="rgb(240,190,35)"
+        }else if (serverRank<=48){
+            color="rgb(192,192,192)"
+        }else{
+            color="rgb(205, 127, 50)"
+        }
+
+        dataPoints.push({
+            color: color,
+            x:  new Date(data.results.cotd[i].date),
+            y: data.results.cotd[i].globalRank,
+            totalPlayer: data.results.cotd[i].totalPlayer,
+            serverRank: serverRank,
+            server: data.results.cotd[i].server
+        });
+    }
+    chart.render(); 
+}
+
+function cotdResultsServers(data) { 
+    for (var i = 0; i < data.servers.length; i++) {
+        dataPoints2.push({
+            x: data.servers[i].server,
+            y: data.servers[i].iteration,
+            averagePosi: data.servers[i].averagePosi
+        });
+    }
+    chart2.render(); 
+}
+
