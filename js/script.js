@@ -373,11 +373,11 @@ if (document.getElementById(name) == null){
         playerdiv.appendChild(divv)
 
         var p = document.createElement("p")
-        p.innerHTML ="green → top 8 ; gold → top 24 ; silver → top 48 ; bronze → top 64"
+        p.innerHTML ="<br>green → top 8 ; gold → top 24 ; silver → top 48 ; bronze → top 64"
         p.setAttribute("style", "text-align: center;");
 
         var pp = document.createElement("p")
-        pp.innerHTML ="<br><i>zooming at an extremity can be tricky, try zooming near an end and then select the move tool to go to the desired date.</i>"
+        pp.innerHTML ="<br><i>zooming at an extremity can be a bit tricky, try zooming near an end and then select the move tool to go to the desired date.</i>"
 
         p.appendChild(pp)
 
