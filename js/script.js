@@ -372,6 +372,13 @@ if (document.getElementById(name) == null){
         divv.setAttribute("id", id);
         playerdiv.appendChild(divv)
 
+        var p = document.createElement("p")
+        p.innerHTML ="green → top 8 ; gold → top 24 ; silver → top 48 ; bronze → top 64"
+        p.setAttribute("style", "text-align: center;");
+        playerdiv.appendChild(p)
+
+        
+
         var divvv = document.createElement("div")
         divvv.setAttribute("style", "height: 370px; max-width: 920px; margin: 20px auto;");
         id = "chartContainer2"+ name
