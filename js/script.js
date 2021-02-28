@@ -656,7 +656,7 @@ function cotdResults(data) {
     }
     //console.log(chart.options.axisY)
 
-    chart.options.axisY["maximum"] =  maxY*1.1; 
+    chart.options.axisY["maximum"] =  maxY*1.05; 
 
     calculateMovingAverage(chart,10);
     chart.render(); 
