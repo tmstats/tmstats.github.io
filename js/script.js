@@ -557,13 +557,13 @@ function cotdResults(data) {
     for (var i = 0; i < data.results.cotd.length; i++) {
         serverRank = data.results.cotd[i].serverRank
         if (serverRank<=8){
-            color="rgb(40, 160, 0)"
+            color="rgb(20, 190, 20)"
         }else if (serverRank<=24){
             color="rgb(240,190,35)"
         }else if (serverRank<=48){
             color="rgb(192,192,192)"
         }else{
-            color="rgb(205, 127, 50)"
+            color="rgb(196, 156, 70)"
         }
 
         dataPoints.push({
