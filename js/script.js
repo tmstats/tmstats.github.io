@@ -711,7 +711,7 @@ function calculateMovingAverage(chart,days) {
       markerSize: 0,
       visible: false,
       color: "blue",
-      name: "show moving average on 10 days",
+      name: "show moving average on 10 cotd",
       showInLegend: true,
       yValueFormatString: "#,##0.00",
       dataPoints: []
