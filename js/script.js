@@ -499,6 +499,7 @@ var dataPoints2 = [];
 function showGraphs(playerID,name){
 
 chart = new CanvasJS.Chart("chartContainer"+name, {
+    exportEnabled: true,
     animationEnabled: true,
     zoomEnabled: true,
     zoomType: "x",
@@ -510,19 +511,33 @@ chart = new CanvasJS.Chart("chartContainer"+name, {
     axisY: {
         title: "Placements",
         titleFontSize: 24,
+        viewportMinimum: 0,
+    },
+    axisY2: {
+        title: "Clutch - Units",
+        titleFontColor: "#C0504E",
+        lineColor: "#C0504E",
+        labelFontColor: "#C0504E",
+        tickColor: "#C0504E"
+    },
+    legend: {
+        cursor: "pointer",
+        itemclick: toggleDataSeries
     },
      axisX:{
         reversed:  true,
+        
         //testt: testt= "2020-12-10",
         //viewportMinimum: new Date(testt),
 
     },
     data: [{
         type: "column",
+        name: "Daily results",
         indexLabelPlacement: "outside",
         indexLabelOrientation: "vertical",
         //yValueFormatString: "#th place",
-        toolTipContent: "<b>{y}{addOverall} place out of {totalPlayer} total Player</b><br>server placement: <b>{serverRank}{add}</b><br>server division: <b>{server}</b>",
+        toolTipContent: "<b>{date}:</b><br><b>{y}{addOverall} place out of {totalPlayer} total Player</b><br>server placement: <b>{serverRank}{add}</b><br>server division: <b>{server}</b>",
         color: "{color}",
         dataPoints: dataPoints
     }]
@@ -545,6 +560,7 @@ chart2 = new CanvasJS.Chart("chartContainer2"+name, {
         title: "Servers",
         reversed:  true,
         interval: 1,
+
     },
     data: [{
         type: "bar",
@@ -616,11 +632,9 @@ function cotdResults(data) {
             addOverall = ""
         }
 
-
-        
-
         //if (indexLabel != ""){indexLabel += add}
-        
+        date = data.results.cotd[i].date
+
         dataPoints.push({
             color: color,
             x:  new Date(data.results.cotd[i].date),
@@ -628,11 +642,15 @@ function cotdResults(data) {
             totalPlayer: data.results.cotd[i].totalPlayer,
             serverRank: serverRank,
             server: data.results.cotd[i].server,
+            date: date,
             add: add,
             addOverall: addOverall,
             indexLabel: indexLabel
         });
     }
+
+    calculateMovingAverage(chart);
+
     chart.render(); 
     clear()
 }
@@ -655,17 +673,67 @@ function cotdResultsServers(data) {
         }
         y = data.servers[i].iteration
 
+        indexLabel = String(y)
+        if (indexLabel == "0"){indexLabel=""}
+
         dataPoints2.push({
             x: data.servers[i].server,
             y: y,
             averagePosi: averagePosi,
             color: color,
-            indexLabel: String(y)
+            indexLabel: indexLabel
         });
     }
     chart2.render(); 
     clear2()
 }
+
+
+// Function to calculate n-Day Simple moving average
+function calculateMovingAverage(chart) {
+  var numOfDays = 10;
+  // return if there are insufficient dataPoints
+  if(chart.options.data[0].dataPoints.length <= numOfDays) return;
+  else {
+    // Add a new line series for  Moving Averages
+    chart.options.data.push({
+      type: "spline",
+      markerSize: 0,
+      visible: false,
+      color: "blue",
+      name: "mooving average on 10 days",
+      showInLegend: true,
+      yValueFormatString: "#,##0.00",
+      dataPoints: []
+    });
+    var total;
+    for(var i = numOfDays; i < chart.options.data[0].dataPoints.length; i++) {
+      total = 0;
+      for(var j = (i - numOfDays); j < i; j++) {
+        total += chart.options.data[0].dataPoints[j].y;
+      }
+      chart.options.data[1].dataPoints.push({
+        x: chart.options.data[0].dataPoints[i].x,
+        y: total / numOfDays
+      });
+    }
+  }
+}
+
+
+
+
+
+function toggleDataSeries(e) {
+    if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+        e.dataSeries.visible = false;
+    } else {
+        e.dataSeries.visible = true;
+    }
+    e.chart.render();
+}
+
+
 
 function clear(){
     dataPoints = []
