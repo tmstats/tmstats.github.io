@@ -1,4 +1,4 @@
-var x = window.location.hash;
+var entry = window.location.hash;
 /*
 p=-1
 newName = []
@@ -21,7 +21,7 @@ console.log(i)
 console.log(newName[i])
 naame = newName[i]
 */
-naame = x.slice(1)
+naame = entry.slice(1)
 
 $.getJSON('https://trackmaniastats.herokuapp.com/api/searchPlayer/'+naame, function(json) {
 
@@ -499,7 +499,7 @@ var dataPoints2 = [];
 function showGraphs(playerID,name){
 
 chart = new CanvasJS.Chart("chartContainer"+name, {
-    exportEnabled: true,
+    exportEnabled: false,
     animationEnabled: true,
     zoomEnabled: true,
     zoomType: "x",
@@ -522,7 +522,8 @@ chart = new CanvasJS.Chart("chartContainer"+name, {
     },
     legend: {
         cursor: "pointer",
-        itemclick: toggleDataSeries
+        itemclick: toggleDataSeries,
+        markerMargin: 10,
     },
      axisX:{
         reversed:  true,
