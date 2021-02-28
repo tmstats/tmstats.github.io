@@ -1,4 +1,5 @@
 var x = window.location.hash;
+/*
 p=-1
 newName = []
 for (var i = 0; i < x.length; i++){
@@ -19,13 +20,17 @@ for (var i = 0; i < newName.length; i++){
 console.log(i)
 console.log(newName[i])
 naame = newName[i]
+*/
+naame = x.slice(1)
+
 $.getJSON('https://trackmaniastats.herokuapp.com/api/searchPlayer/'+naame, function(json) {
 
         playerID = json[naame.toLowerCase()]
         seeProfile(playerID)
 
 });
-}
+
+//}
 
 
 
