@@ -299,8 +299,8 @@ if (document.getElementById(name) == null){
         o = json.playerNames.length -1 
         //console.log(o)
         for (var i = o; i >= 0; i--) {
-            console.log("here")
-            console.log(i)
+            //console.log("here")
+            //console.log(i)
             //console.log("1")
             var tr = table.insertRow(-1);  
             var td = document.createElement("td");    
@@ -331,13 +331,13 @@ if (document.getElementById(name) == null){
     
         var divv = document.createElement("div")
         divv.setAttribute("style", "height: 370px; max-width: 920px; margin: 0px auto;");
-        id = "chartContainer"
+        id = "chartContainer"+ name
         divv.setAttribute("id", id);
         playerdiv.appendChild(divv)
 
         var divvv = document.createElement("div")
         divvv.setAttribute("style", "height: 370px; max-width: 920px; margin: 20px auto;");
-        id = "chartContainer2"
+        id = "chartContainer2"+ name
         divvv.setAttribute("id", id);
         playerdiv.appendChild(divvv)
 
@@ -414,7 +414,7 @@ if (document.getElementById(name) == null){
         path = "#"+name
         window.location.href = path ;
 
-        showGraphs(playerID)
+        showGraphs(playerID,name)
         //$("#playerID").html(json.playerID);
     
 
@@ -442,15 +442,15 @@ var chart = null;
 var dataPoints = [];
 var dataPoints2 = [];
 
-function showGraphs(playerID){
+function showGraphs(playerID,name){
 
-chart = new CanvasJS.Chart("chartContainer", {
+chart = new CanvasJS.Chart("chartContainer"+name, {
     animationEnabled: true,
     zoomEnabled: true,
     zoomType: "x",
     theme: "light2",
     title: {
-        text: "COTDs results history (try zooming in)"
+        text: "COTDs result history (try zooming in)"
     },
     axisY: {
         title: "Placements",
@@ -469,7 +469,8 @@ chart = new CanvasJS.Chart("chartContainer", {
 }
 );
 
-chart2 = new CanvasJS.Chart("chartContainer2", {
+
+chart2 = new CanvasJS.Chart("chartContainer2"+name, {
     animationEnabled: true,
     theme: "light2",
     title: {
@@ -478,7 +479,6 @@ chart2 = new CanvasJS.Chart("chartContainer2", {
     axisY: {
         title: "Number of times played",
         titleFontSize: 24,
-        interval: 1,
         viewportMinimum: 0,
     },
      axisX:{
@@ -495,9 +495,7 @@ chart2 = new CanvasJS.Chart("chartContainer2", {
         
     }]
 }
-
 );
-
 
 //$.getJSON("https://trackmaniastats.herokuapp.com/api/dataTest", callback);    
 $.getJSON("https://trackmaniastats.herokuapp.com/api/playerProfiles/"+playerID, cotdResults);    
@@ -530,6 +528,7 @@ function cotdResults(data) {
         });
     }
     chart.render(); 
+    clear()
 }
 
 function cotdResultsServers(data) { 
@@ -541,5 +540,16 @@ function cotdResultsServers(data) {
         });
     }
     chart2.render(); 
+    clear2()
 }
+
+function clear(){
+    dataPoints = []
+}
+
+function clear2(){
+    dataPoints2 = []
+}
+
+
 
