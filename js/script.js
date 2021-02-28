@@ -556,8 +556,10 @@ $.getJSON("https://trackmaniastats.herokuapp.com/api/cotdResultsServers/"+player
 function cotdResults(data) {    
     for (var i = 0; i < data.results.cotd.length; i++) {
         serverRank = data.results.cotd[i].serverRank
-        if (serverRank<=8){
-            color="rgb(20, 190, 20)"
+        if (serverRank== "DNF"){
+color="rgb(30, 30, 30)"
+}else if (serverRank<=8){
+            color="rgb(0, 200, 20)"
         }else if (serverRank<=24){
             color="rgb(240,190,35)"
         }else if (serverRank<=48){
