@@ -588,6 +588,7 @@ function cotdResults(data) {
         serverRank = data.results.cotd[i].serverRank
     
         indexLabel =  String(serverRank)
+        if (indexLabel=="DNF"){indexLabel=""}
 
         if (serverRank == "DNF"){
             color="rgb(30, 30, 30)"
@@ -617,7 +618,7 @@ function cotdResults(data) {
 
 
         globalRank = data.results.cotd[i].globalRank
-        if (globalRank > maxY && indexLabel !=  "DNF"){
+        if (globalRank > maxY && indexLabel !=  ""){
             maxY = globalRank
             //console.log(maxY)
         }
@@ -655,12 +656,13 @@ function cotdResults(data) {
     }
     //console.log(chart.options.axisY)
 
-    chart.options.axisY["maximum"] =  maxY+10; 
+    chart.options.axisY["maximum"] =  maxY*1.1; 
 
     calculateMovingAverage(chart,10);
     chart.render(); 
     clear()
 }
+
 
 function cotdResultsServers(data) { 
     for (var i = 0; i < data.servers.length; i++) {
@@ -726,6 +728,7 @@ function calculateMovingAverage(chart,days) {
     }
   }
 }
+
 
 
 
