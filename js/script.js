@@ -375,6 +375,12 @@ if (document.getElementById(name) == null){
         var p = document.createElement("p")
         p.innerHTML ="green → top 8 ; gold → top 24 ; silver → top 48 ; bronze → top 64"
         p.setAttribute("style", "text-align: center;");
+
+        var pp = document.createElement("p")
+        pp.innerHTML ="<br><i>zooming at an extremity can be tricky, try zooming near an end and then select the move tool to go to the desired date.</i>"
+
+        p.appendChild(pp)
+
         playerdiv.appendChild(p)
 
         
@@ -567,7 +573,6 @@ function cotdResults(data) {
 
         if (serverRank == "DNF"){
             color="rgb(30, 30, 30)"
-            add = ""
         }else if (serverRank<=8){
             color="rgb(0, 200, 00)"
             
@@ -588,6 +593,8 @@ function cotdResults(data) {
             add = "st"
         } else if (serverRank != "DNF"){
             add = "th"
+        }else{
+            add = ""
         }
 
 
@@ -603,6 +610,8 @@ function cotdResults(data) {
             addOverall = "st"
         } else if (serverRank != "DNF"){
             addOverall = "th"
+        }else{
+            addOverall = ""
         }
 
 
@@ -610,7 +619,6 @@ function cotdResults(data) {
 
         //if (indexLabel != ""){indexLabel += add}
         
-        test = "2020-12-10"
         dataPoints.push({
             color: color,
             x:  new Date(data.results.cotd[i].date),
@@ -620,9 +628,7 @@ function cotdResults(data) {
             server: data.results.cotd[i].server,
             add: add,
             addOverall: addOverall,
-            indexLabel: indexLabel,
-            label: "South",
-            test: test
+            indexLabel: indexLabel
         });
     }
     chart.render(); 
