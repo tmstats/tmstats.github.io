@@ -491,7 +491,6 @@ $(document).ready(function() {
 });
 
 
-
 var chart = null;
 var dataPoints = [];
 var dataPoints2 = [];
@@ -510,8 +509,7 @@ chart = new CanvasJS.Chart("chartContainer"+name, {
     },
     axisY: {
         title: "Placements",
-        titleFontSize: 24,
-        viewportMinimum: 0,
+        titleFontSize: 24
     },
     axisY2: {
         title: "Clutch - Units",
@@ -584,10 +582,11 @@ $.getJSON("https://trackmaniastats.herokuapp.com/api/cotdResultsServers/"+player
 }
 
 
-function cotdResults(data) {    
+function cotdResults(data) {   
+    var maxY = 0;
     for (var i = 0; i < data.results.cotd.length; i++) {
         serverRank = data.results.cotd[i].serverRank
-        
+    
         indexLabel =  String(serverRank)
 
         if (serverRank == "DNF"){
@@ -618,6 +617,10 @@ function cotdResults(data) {
 
 
         globalRank = data.results.cotd[i].globalRank
+        if (globalRank > maxY && indexLabel !=  "DNF"){
+            maxY = globalRank
+            //console.log(maxY)
+        }
 
         lastDigitOverall = globalRank%10
 
@@ -646,12 +649,15 @@ function cotdResults(data) {
             date: date,
             add: add,
             addOverall: addOverall,
-            indexLabel: indexLabel
+            indexLabel: indexLabel,
+            maxY:maxY
         });
     }
+    //console.log(chart.options.axisY)
 
-    calculateMovingAverage(chart);
+    chart.options.axisY["maximum"] =  maxY+10; 
 
+    calculateMovingAverage(chart,10);
     chart.render(); 
     clear()
 }
@@ -691,8 +697,8 @@ function cotdResultsServers(data) {
 
 
 // Function to calculate n-Day Simple moving average
-function calculateMovingAverage(chart) {
-  var numOfDays = 10;
+function calculateMovingAverage(chart,days) {
+  var numOfDays = days;
   // return if there are insufficient dataPoints
   if(chart.options.data[0].dataPoints.length <= numOfDays) return;
   else {
