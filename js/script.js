@@ -509,7 +509,8 @@ chart = new CanvasJS.Chart("chartContainer"+name, {
     },
     axisY: {
         title: "Placements",
-        titleFontSize: 24
+        titleFontSize: 24,
+        viewportMinimum: 0
     },
     axisY2: {
         title: "Clutch - Units",
