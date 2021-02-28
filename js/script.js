@@ -450,7 +450,7 @@ chart = new CanvasJS.Chart("chartContainer"+name, {
     zoomType: "x",
     theme: "light2",
     title: {
-        text: "COTDs result history (try zooming in)"
+        text: "COTDs result history (zoom enabled)"
     },
     axisY: {
         title: "Placements",
