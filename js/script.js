@@ -549,6 +549,7 @@ chart2 = new CanvasJS.Chart("chartContainer2"+name, {
     data: [{
         type: "bar",
         //yValueFormatString: "#th place",
+        indexLabelPlacement: "outside",
         toolTipContent: "Average position: <b>{averagePosi}</b>",
         color: "grey",
         dataPoints: dataPoints2,
@@ -639,7 +640,7 @@ function cotdResults(data) {
 function cotdResultsServers(data) { 
     for (var i = 0; i < data.servers.length; i++) {
         averagePosi = data.servers[i].averagePosi
-        
+
         if (averagePosi == "DNF"){
             color="rgb(30, 30, 30)"
         }else if (averagePosi<=8){
@@ -652,12 +653,14 @@ function cotdResultsServers(data) {
         }else{
             color="rgb(236, 156, 70)"
         }
+        y = data.servers[i].iteration
 
         dataPoints2.push({
             x: data.servers[i].server,
-            y: data.servers[i].iteration,
+            y: y,
             averagePosi: averagePosi,
-            color: color
+            color: color,
+            indexLabel: String(y)
         });
     }
     chart2.render(); 
