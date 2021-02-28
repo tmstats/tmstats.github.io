@@ -608,7 +608,7 @@ function cotdResults(data) {
             addOverall = "nd"
         } else if (lastDigitOverall == 1){
             addOverall = "st"
-        } else if (serverRank != "DNF"){
+        } else if (lastDigitOverall != "DNF"){
             addOverall = "th"
         }else{
             addOverall = ""
