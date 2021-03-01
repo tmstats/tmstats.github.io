@@ -511,6 +511,10 @@ chart = new CanvasJS.Chart("chartContainer"+name, {
         title: "Placements",
         titleFontSize: 24,
         viewportMinimum: 0,
+        stripLines: [{
+        value:0,
+        label:"server 1",
+    }]
         },
     axisY2: {
         title: "Clutch - Units",
