@@ -511,96 +511,96 @@ chart = new CanvasJS.Chart("chartContainer"+name, {
         title: "Placements",
         titleFontSize: 24,
         viewportMinimum: 0,
-stripLines: [
+        stripLines: [
        {value:0,
-        label:"server 1"
+        label:"server 1",
         labelPlacement:"outside"},
         {value:64,
-        label:"server 2"
+        label:"server 2",
         labelPlacement:"outside"},
         {value:128,
-        label:"server 3"
+        label:"server 3",
         labelPlacement:"outside"},
         {value:192,
-        label:"server 4"
+        label:"server 4",
         labelPlacement:"outside"},
         {value:256,
-        label:"server 5"
+        label:"server 5",
         labelPlacement:"outside"},
         {value:320,
-        label:"server 6"
+        label:"server 6",
         labelPlacement:"outside"},
         {value:384,
-        label:"server 7"
+        label:"server 7",
         labelPlacement:"outside"},
         {value:448,
-        label:"server 8"
+        label:"server 8",
         labelPlacement:"outside"},
         {value:512,
-        label:"server 9"
+        label:"server 9",
         labelPlacement:"outside"},
         {value:576,
-        label:"server 10"
+        label:"server 10",
         labelPlacement:"outside"},
         {value:640,
-        label:"server 11"
+        label:"server 11",
         labelPlacement:"outside"},
         {value:704,
-        label:"server 12"
+        label:"server 12",
         labelPlacement:"outside"},
         {value:768,
-        label:"server 13"
+        label:"server 13",
         labelPlacement:"outside"},
         {value:832,
-        label:"server 14"
+        label:"server 14",
         labelPlacement:"outside"},
         {value:896,
-        label:"server 15"
+        label:"server 15",
         labelPlacement:"outside"},
         {value:960,
-        label:"server 16"
+        label:"server 16",
         labelPlacement:"outside"},
         {value:1024,
-        label:"server 17"
+        label:"server 17",
         labelPlacement:"outside"},
         {value:1088,
-        label:"server 18"
+        label:"server 18",
         labelPlacement:"outside"},
         {value:1152,
-        label:"server 19"
+        label:"server 19",
         labelPlacement:"outside"},
         {value:1216,
-        label:"server 20"
+        label:"server 20",
         labelPlacement:"outside"},
         {value:1280,
-        label:"server 21"
+        label:"server 21",
         labelPlacement:"outside"},
         {value:1344,
-        label:"server 22"
+        label:"server 22",
         labelPlacement:"outside"},
         {value:1408,
-        label:"server 23"
+        label:"server 23",
         labelPlacement:"outside"},
         {value:1472,
-        label:"server 24"
+        label:"server 24",
         labelPlacement:"outside"},
         {value:1536,
-        label:"server 25"
+        label:"server 25",
         labelPlacement:"outside"},
         {value:1600,
-        label:"server 26"
+        label:"server 26",
         labelPlacement:"outside"},
         {value:1664,
-        label:"server 27"
+        label:"server 27",
         labelPlacement:"outside"},
         {value:1728,
-        label:"server 28"
+        label:"server 28",
         labelPlacement:"outside"},
         {value:1856,
-        label:"server 29"
+        label:"server 29",
         labelPlacement:"outside"},
         {value:1920,
-        label:"server 39"
+        label:"server 30",
         labelPlacement:"outside"}
         
 
