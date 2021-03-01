@@ -700,7 +700,7 @@ function cotdResultsServers(data) {
 }
 
 
-// Function to calculate n-Day Simple moving average
+// Function to calculate nn-Day Simple moving average
 function calculateMovingAverage(chart,days) {
   var numOfDays = days;
   // return if there are insufficient dataPoints
