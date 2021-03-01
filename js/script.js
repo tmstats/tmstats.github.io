@@ -373,7 +373,7 @@ if (document.getElementById(name) == null){
         playerdiv.appendChild(divv)
 
         var p = document.createElement("p")
-        p.innerHTML ="<br>greeen → top 8 ; gold → top 24 ; silver → top 48 ; bronze → top 64"
+        p.innerHTML ="<br>green → top 8 ; gold → top 24 ; silver → top 48 ; bronze → top 64"
         p.setAttribute("style", "text-align: center;");
 
         var pp = document.createElement("p")
@@ -551,7 +551,7 @@ chart = new CanvasJS.Chart("chartContainer"+name, {
 
 chart2 = new CanvasJS.Chart("chartContainer2"+name, {
     animationEnabled: true,
-    theme: "light2",
+    theme: "dark2",
     title: {
         text: "COTDs server Distribution"
     },
