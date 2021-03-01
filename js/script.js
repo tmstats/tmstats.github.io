@@ -680,7 +680,7 @@ function cotdResultsServers(data) {
         }else if (averagePosi<=48){
             color="rgb(192,192,192)"
         }else{
-            color="rgb(236, 156, 70)"
+            color="rgb(237, 156, 70)"
         }
         y = data.servers[i].iteration
 
