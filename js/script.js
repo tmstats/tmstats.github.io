@@ -373,7 +373,7 @@ if (document.getElementById(name) == null){
         playerdiv.appendChild(divv)
 
         var p = document.createElement("p")
-        p.innerHTML ="<br>green → top 8 ; goold → top 24 ; silver → top 48 ; bronze → top 64"
+        p.innerHTML ="<br>green → top 8 ; gold → top 24 ; silver → top 48 ; bronze → top 64"
         p.setAttribute("style", "text-align: center;");
 
         var pp = document.createElement("p")
