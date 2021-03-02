@@ -510,8 +510,9 @@ chart = new CanvasJS.Chart("chartContainer"+name, {
     axisY: {
         title: "Placements",
         titleFontSize: 24,
-        viewportMinimum: 0
-    },
+        viewportMinimum: 0,
+        
+        },
     axisY2: {
         title: "Clutch - Units",
         titleFontColor: "#C0504E",
@@ -679,7 +680,7 @@ function cotdResultsServers(data) {
         }else if (averagePosi<=48){
             color="rgb(192,192,192)"
         }else{
-            color="rgb(236, 156, 70)"
+            color="rgb(237, 156, 70)"
         }
         y = data.servers[i].iteration
 
@@ -699,7 +700,7 @@ function cotdResultsServers(data) {
 }
 
 
-// Function to calculate n-Day Simple moving average
+// Function to calculate nn-Day Simple moving average
 function calculateMovingAverage(chart,days) {
   var numOfDays = days;
   // return if there are insufficient dataPoints
@@ -711,7 +712,7 @@ function calculateMovingAverage(chart,days) {
       markerSize: 0,
       visible: false,
       color: "blue",
-      name: "show moving average on 10 days",
+      name: "show moving average on 10 cotd",
       showInLegend: true,
       yValueFormatString: "#,##0.00",
       dataPoints: []
