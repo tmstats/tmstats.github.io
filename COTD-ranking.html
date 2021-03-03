@@ -35,21 +35,6 @@ h2 {
 }
 
 
-        th, td, p, input {
-            font:14px Verdana;
-        }
-        table, th, td 
-        {
-            border: solid 1px #555;
-            border-collapse: collapse;
-            padding: 5px 8px;
-            text-align: center;
-            background-color: #e0e0e0;
-        }
-        th {
-            font-weight:bold;
-        }
-
 
 
 .profileButton:hover{
@@ -66,51 +51,6 @@ h2 {
 #players{
   width: 40%;
 }
-
-
-
-.example_f {
-   border-radius: 4px;
-   background: linear-gradient(to right, #67b26b, #4ca2cb) !important;
-   border: none;
-   color: #FFFFFF;
-   text-align: center;
-   text-transform: uppercase;
-   font-size: 12px;
-   padding: 10px;
-   width: 200px;
-   transition: all 0.2s;
-   cursor: pointer;
-   margin: 3px;
- }
- .example_f span {
-   cursor: pointer;
-   display: inline-block;
-   position: relative;
-   transition: 0.2s;
- }
- .example_f span:after {
-   content: '\00bb';
-   position: absolute;
-   opacity: 0;
-   top: 0;
-   right: -20px;
-   transition: 0.5s;
- }
- .example_f:hover span {
-   padding-right: 24px;
- }
- .example_f:hover span:after {
-   opacity: 1;
-   right: 0;
- }
-
-
-
-
-
-
-
 
 
 .row{
@@ -210,6 +150,54 @@ h2 {
 }
 
 
+
+.styled-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.styled-table thead tr {
+    background-color: #009879;
+    color: #efefff;
+    text-align: left;
+}
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+}
+.styled-table tbody tr {
+    border-bottom: 2px solid #5d5d5d;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+.styled-table tbody tr.active-row {
+    font-weight: bold;
+    color: #009879;
+}
+
+
+#selectCOTD th{
+  text-align: center;
+  border: 1px solid black;
+  background-color: lightgrey;
+
+}
+#selectCOTD th:hover{
+    background-color: lightgreen;
+    cursor: pointer;
+}
+
+
     </style>
 
     <script src="js/canvasjs.min.js"></script>
@@ -220,11 +208,40 @@ h2 {
   <body>
     <div style="text-align: center;">
 
+
     <h1>Welcome to TrackmaniaStats</h1>
     <i style="color: white; text-align: center;">Updated daily at 20:00 CET (last added cotd: <i id="dayLastAddedCOTD">refresh</i>)</i>
     </div>
     <section id ="COTDRankings">
     <h2>COTD Rankings!</h2>
+
+    <p>
+        <h3>How does this leaderboard works?</h3>
+        <b>
+          Depending on the number you'll choose below, it calculate the average position of all the players who played at least x COTD, and rank the players accordingly.
+        </b>
+        <br></br>
+        <p>
+          Ranks are <b>based on the relative position in % as this allows to take into account the variation of the total number of players per cotd</b> (which varies from day to day ^-^) <i>(for exemple: someone who placed 500 out of 1000 player (top 50%) has actually performed worst than someone else who would have finished 600 out of 1500 players (top 40%))</i>
+        </p>
+        <br>
+        <table style="width: 100%" id="selectCOTD">
+          <th onclick="showXRanking('10')">10</th>
+          <th onclick="showXRanking('20')">20</th>
+          <th onclick="showXRanking('30')">30</th>
+          <th onclick="showXRanking('40')">40</th>
+          <th onclick="showXRanking('50')">50</th>
+          <th onclick="showXRanking('60')">60</th>
+          <th onclick="showXRanking('70')">70</th>
+          <th onclick="showXRanking('80')">80</th>
+          <th onclick="showXRanking('90')">90</th>
+          <th onclick="showXRanking('100')">100</th>
+          <th onclick="showXRanking('110')">110</th>
+          <th onclick="showXRanking('120')">120</th>
+          <th onclick="showXRanking('130')">130</th>
+          <th onclick="showXRanking('140')">140</th>
+        </table>
+    </p>
     
     <div id="tableCOTD">
       
