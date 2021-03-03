@@ -1,11 +1,13 @@
 
-
-
-
+var entry = window.location.hash;
+toppp = entry.slice(1)
 
 var URL = "https://trackmaniastats.herokuapp.com/api/COTDRankings";
 $.getJSON(URL, function(json) {
 window.json = json
+ p = document.getElementById("dataStatus")
+ p.innerHTML = "Data collected, you can use the leaderboard"
+ showXRanking(toppp)
 });
 
 function showXRanking(x){
@@ -14,7 +16,7 @@ function showXRanking(x){
 
         div = document.getElementById("tableCOTD")
 
-        div.innerHTML = ""
+        div.innerHTML = "<p style:'text-align:center;'>Leaderboard on the last " + x + " COTD played buy the players</p>" 
 
         var top = json[x]
 
@@ -62,7 +64,6 @@ function showXRanking(x){
 
             td.appendChild(a);
             //iner = 'test'
-            console.log(td.innerHTML)
             tr.appendChild(td);
 
             var td = document.createElement("td");    
@@ -78,14 +79,16 @@ function showXRanking(x){
         //var divContainerr = document.getElementById(id);
         //divContainerr.innerHTML = "";
         div.appendChild(table);
-
+        path = "#"+x
+        //path = curentLocation + "#"+name
+        window.location.href = path ;
         //div.setAttribute("display", "none"); 
         
         //var divContainerr = document.getElementById(id);
         //divContainerr.innerHTML = "";
         //playerdiv.appendChild(divo)   
 }else{
-    div.innerHTML = "No data"
+    div.innerHTML = "No player have played that much COTD lol"
 }
 }
 
