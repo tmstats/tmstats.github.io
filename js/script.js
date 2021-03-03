@@ -1,3 +1,11 @@
+function sleep(milliseconds) {
+  const date = Date.now();
+  let currentDate = null;
+  do {
+    currentDate = Date.now();
+  } while (currentDate - date < milliseconds);
+}
+
 var entry = window.location.hash;
 /*
 p=-1
@@ -21,6 +29,31 @@ console.log(i)
 console.log(newName[i])
 naame = newName[i]
 */
+/*
+naame = entry.slice(1)
+
+$.getJSON('https://trackmaniastats.herokuapp.com/api/searchPlayer/'+naame, function(json) {
+
+        var keys = [];
+        for(var k in json) keys.push(k);
+//console.log(keys.length)
+
+        if (keys.length < 30){
+    for (var i = 0; i < keys.length; i++){
+        naame = keys[i]
+        playerID = json[naame.toLowerCase()]
+        seeProfile(playerID)
+        console.log(i)
+        sleep(2000);
+        
+    }
+}        
+
+
+});
+
+//}
+*/
 naame = entry.slice(1)
 
 $.getJSON('https://trackmaniastats.herokuapp.com/api/searchPlayer/'+naame, function(json) {
@@ -29,8 +62,6 @@ $.getJSON('https://trackmaniastats.herokuapp.com/api/searchPlayer/'+naame, funct
         seeProfile(playerID)
 
 });
-
-//}
 
 
 
@@ -83,7 +114,7 @@ $.getJSON('https://trackmaniastats.herokuapp.com/api/dayLastAddedCOTD', function
 });
 
 
-function showNewPlayers(){
+
 $.getJSON('https://trackmaniastats.herokuapp.com/api/newCOTDPlayers', function(json) {
       
         //var section = document.getElementById("FunFacts");
@@ -108,12 +139,13 @@ $.getJSON('https://trackmaniastats.herokuapp.com/api/newCOTDPlayers', function(j
             p.innerHTML = p.innerHTML + String(result[i][0] +" // ")
             }
 
+
         }
 
         //section.appendChild(p);
 
 });
-}
+
 
 $.getJSON('https://trackmaniastats.herokuapp.com/api/numberNewNamePlayers', function(json) {
       
@@ -122,14 +154,14 @@ $.getJSON('https://trackmaniastats.herokuapp.com/api/numberNewNamePlayers', func
 
 });
 
-function showNewNamePlayers(){
+
 $.getJSON('https://trackmaniastats.herokuapp.com/api/newNamePlayers', function(json) {
       
         //var section = document.getElementById("FunFacts");
         var p = document.getElementById("newNamePlayers");
         //var p = document.createElement("p");
 
-        p.innerHTML = "<b>OLD  → NEW : </b>"
+        p.innerHTML = "<b>OLD  → NEW: </b>"
 
         var result = [];
 
@@ -145,10 +177,9 @@ $.getJSON('https://trackmaniastats.herokuapp.com/api/newNamePlayers', function(j
             }
 
         }
-
-
+        p.innerHTML = p.innerHTML + "<br></br>"
 });
-}
+
 
 
 function wait(playerID){
@@ -271,7 +302,7 @@ if (document.getElementById(name) == null){
         if (document.getElementById('playerProfile').children.length > 0) {
             //console.log("yo")
             //console.log(document.getElementById('playerProfile').children.length)
-            p.innerHTML ="<hr>"
+            p.innerHTML ="<hr style='width:80%; color: black; border-width: 2px;'>"
         }
 
         else{
@@ -401,7 +432,7 @@ if (document.getElementById(name) == null){
 
         var p = document.createElement("p")
         
-        p.innerHTML ="<br>Raw data (old format):"
+        p.innerHTML ="<br><p id=\"newPlayers\" class=\"button_cont\"> <a class=\"example_f\" onclick=\"showrawData(\'"+name+"\')\" rel=\"nofollow\"><span>Show raw data (old format):</a></p>"
         //$(document.getElementById("playerProfile").appendChild(h3))
         playerdiv.appendChild(p)
 
@@ -448,6 +479,9 @@ if (document.getElementById(name) == null){
 
         //var divContainerr = document.getElementById(id);
         //divContainerr.innerHTML = "";
+        table.style.display = 'none';
+
+        table.id = "RawData"+name
         div.appendChild(table);
 
         playerdiv.appendChild(div)
@@ -473,9 +507,24 @@ if (document.getElementById(name) == null){
     
 
 }
+else{
+    path = "#"+name
+    window.location.href = path ;
+}
 });
 }
 
+function showrawData(player){
+    
+    pathID = "RawData"+player
+    rawdata = document.getElementById(pathID)
+    
+    rawdata.style.display = 'flex';
+    rawdata.setAttribute("style", "align-items: center;"); 
+    rawdata.setAttribute("style", "justify-content: center;");
+
+
+}
 
 
 
@@ -732,10 +781,6 @@ function calculateMovingAverage(chart,days) {
 }
 
 
-
-
-
-
 function toggleDataSeries(e) {
     if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
         e.dataSeries.visible = false;
@@ -757,3 +802,10 @@ function clear2(){
 
 
 
+
+
+function updateScrollableSizeFunfacts(button){
+  button.classList.toggle("active");
+    var content = button.nextElementSibling;
+    content.style.maxHeight = content.scrollHeight +"px";
+}
