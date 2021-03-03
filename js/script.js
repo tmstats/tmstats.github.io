@@ -587,7 +587,7 @@ chart = new CanvasJS.Chart("chartContainer"+name, {
         indexLabelPlacement: "outside",
         indexLabelOrientation: "vertical",
         //yValueFormatString: "#th place",
-        toolTipContent: "<b>{date}:</b><br><b>{y}{addOverall} place out of {totalPlayer} total Player</b><br>server placement: <b>{serverRank}{add}</b><br>server division: <b>{server}</b>",
+        toolTipContent: "<b>{date}:</b><br><b>{y}{addOverall} place out of {totalPlayer} total players</b><br>server rank: <b>{serverRank}{add}</b><br>server division: <b>{server}</b>",
         color: "{color}",
         dataPoints: dataPoints
     }]
