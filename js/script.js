@@ -809,3 +809,59 @@ function updateScrollableSizeFunfacts(button){
     var content = button.nextElementSibling;
     content.style.maxHeight = content.scrollHeight +"px";
 }
+
+
+
+  var DisclaimerButton = document.getElementById("DisclaimerButton");
+var i;
+
+var nbOpenDiclaimer = 0;
+
+  DisclaimerButton.addEventListener("click", function() {
+    nbOpenDiclaimer ++;
+    if (nbOpenDiclaimer%2 == 0){
+      var plusMinus = document.getElementById("plusMinusDisclaimer");
+    plusMinus.innerHTML = "+"
+  }else{
+    var plusMinus = document.getElementById("plusMinusDisclaimer");
+    plusMinus.innerHTML = "-"
+  }
+    
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.maxHeight){
+      content.style.maxHeight = null;
+    } else {
+      content.style.maxHeight = content.scrollHeight +"px";
+    } 
+  });
+
+
+
+var FunFactsButton = document.getElementById("FunFactsButton");
+var i;
+
+var nbOpenFunFacts = 0;
+
+
+  FunFactsButton.addEventListener("click", function() {
+    nbOpenFunFacts ++;
+    if (nbOpenFunFacts%2 == 0){
+      var plusMinus = document.getElementById("plusMinusFunfacts");
+    plusMinus.innerHTML = "+"
+  }else{
+    var plusMinus = document.getElementById("plusMinusFunfacts");
+    plusMinus.innerHTML = "-"
+  }
+    
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.maxHeight){
+      content.style.maxHeight = null;
+    } else {
+      content.style.maxHeight = content.scrollHeight +"px";
+    } 
+  });
+
+
+

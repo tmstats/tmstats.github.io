@@ -255,7 +255,7 @@ h2 {
     <div style="text-align: center;">
 
     <h1>Welcome to TrackmaniaStats</h1>
-    <i style="color: white; text-align: center;">Updated daily at 20:00 CET (last added cotd: <i id="dayLastAddedCOTD">API is staarting give it 10s</i>)</i>
+    <i style="color: white; text-align: center;">Updated daily at 20:00 CET (last added cotd: <i id="dayLastAddedCOTD">API is starting give it 10s pls</i>)</i>
     </div>
 
     <section id ="Disclaimer" style="padding: 0px;" >
@@ -264,9 +264,9 @@ h2 {
 <div class="content" >
   <p style="display: block; font-size: 5px;"></p>
     <p>
-      This website only exist because I wanted everyone to be able to have an overview of their past results on the Cups of the Day, a knock-out daily competition hosted by Nadeo.</p> <p>You can check you own profile or the ones of the others, so please, do not use this tool to judge / make fun of somebody, because some players just play the cotd for fun ¯\_(ツ)_/¯</p>
+      This website only exist because I wanted everyone to be able to have an overview of their past results on the Cups of the Day, a knock-out daily competition hosted by Nadeo.</p> <p>You can check you own profile or the ones of the others, so please, do not use this tool to judge / make fun of somebody, because some players just play the cotd for fun ^-^</p>
 <p> To access a profile, enter a name (or just a part of a name), and you will see all corresponding player that match your search. To see someone's profile, click on the see profile button.</p>
-<p>You can try in alpha the rankings page <a href="https://tmstats.github.io/COTD-ranking#10" target="_blank">https://tmstats.github.io/COTD-ranking</a> 👀</p>
+<p>You can try in alpha the rankings page <a href="https://tmstats.github.io/COTD-ranking#last10">https://tmstats.github.io/COTD-ranking</a> 👀</p>
 </div>
     </section>
 
@@ -342,67 +342,5 @@ h2 {
   </body>
   
 </html>
-
-
-<script>
-
-  var DisclaimerButton = document.getElementById("DisclaimerButton");
-var i;
-
-var nbOpenDiclaimer = 0;
-
-  DisclaimerButton.addEventListener("click", function() {
-    nbOpenDiclaimer ++;
-    if (nbOpenDiclaimer%2 == 0){
-      var plusMinus = document.getElementById("plusMinusDisclaimer");
-    plusMinus.innerHTML = "+"
-  }else{
-    var plusMinus = document.getElementById("plusMinusDisclaimer");
-    plusMinus.innerHTML = "-"
-  }
-    
-    this.classList.toggle("active");
-    var content = this.nextElementSibling;
-    if (content.style.maxHeight){
-      content.style.maxHeight = null;
-    } else {
-      content.style.maxHeight = content.scrollHeight +"px";
-    } 
-  });
-
-
-
-var FunFactsButton = document.getElementById("FunFactsButton");
-var i;
-
-var nbOpenFunFacts = 0;
-
-
-  FunFactsButton.addEventListener("click", function() {
-    nbOpenFunFacts ++;
-    if (nbOpenFunFacts%2 == 0){
-      var plusMinus = document.getElementById("plusMinusFunfacts");
-    plusMinus.innerHTML = "+"
-  }else{
-    var plusMinus = document.getElementById("plusMinusFunfacts");
-    plusMinus.innerHTML = "-"
-  }
-    
-    this.classList.toggle("active");
-    var content = this.nextElementSibling;
-    if (content.style.maxHeight){
-      content.style.maxHeight = null;
-    } else {
-      content.style.maxHeight = content.scrollHeight +"px";
-    } 
-  });
-
-
-
-
-
-
-</script>
-
 </body>
 </html>

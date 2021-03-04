@@ -1,12 +1,11 @@
-html, 
-body {
+html, body {
     height: 100%;
     background-color:#181d22;
 }
 
 
 section {
-  background-color:#eeddee;
+  background-color:#c2cad0;
   text-align: justify;
   margin-top: 30px;
   margin-bottom: 30px;
@@ -43,8 +42,8 @@ h2 {
 
 
 .profileButton:hover{
-	background-color: lightgreen;
-	cursor: pointer;
+    background-color: lightgreen;
+    cursor: pointer;
 }
 
 .playerProfile{
@@ -88,7 +87,7 @@ h2 {
    transition: 0.5s;
  }
  .example_f:hover span {
-   padding-right: 25px;
+   padding-right: 24px;
  }
  .example_f:hover span:after {
    opacity: 1;
@@ -194,8 +193,33 @@ h2 {
 
 .footer-dark .copyright {
   text-align:center;
-  padding-top:24px;
   opacity:0.3;
   font-size:13px;
   margin-bottom:0;
+}
+
+
+.collapsible {
+  background-color:#282d32;
+  color: #eeeeee;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+
+  outline: none;
+  font-size: 15px;
+}
+
+.active, .collapsible:hover {
+  background-color:#252a30;
+}
+
+.content {
+  padding: 0 20px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  background-color:#c2cad0;
 }

@@ -194,11 +194,49 @@ h2 {
   text-align: center;
   border: 1px solid black;
   background-color: lightgrey;
+  height: 40px;
+
+}
+#selectType th{
+  text-align: center;
+  border: 1px solid black;
+  border-bottom: 0px;
+  background-color: lightgrey;
+  height: 50px;
 
 }
 #selectCOTD th:hover{
     background-color: lightgreen;
     cursor: pointer;
+}
+#selectType th:hover{
+    background-color: lightgreen;
+    cursor: pointer;
+}
+
+
+.collapsible {
+  background-color:#282d32;
+  color: #eeeeee;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+
+  outline: none;
+  font-size: 15px;
+}
+
+.active, .collapsible:hover {
+  background-color:#252a30;
+}
+.content {
+  padding: 0 20px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  background-color:#c2cad0;
 }
 
 
@@ -214,43 +252,57 @@ h2 {
 
 
     <h1>Welcome to TrackmaniaStats</h1>
-    <i style="color: white; text-align: center;">Updated daily at 20:00 CET (last added cotd: <i id="dayLastAddedCOTD">refresh</i>)</i>
+    <i style="color: white; text-align: center;"><a href="https://tmstats.github.io/">Go back to main page</a></i>
     </div>
-    <section id ="COTDRankings">
-    <h2>COTD Rankings!</h2>
-    <p id="dataStatus">Gathering data...</p>
-
-    <p>
-        <h3>How does this leaderboard work?</h3>
+    <section id ="COTDRankings" style="padding: 0px;">
+      <button class="collapsible" id="RankingButton"><h2 ><i>How does this leaderboard work?</i><i id="plusMinusRanking" style="float: right; padding-right: 20px;">+</i><h2></button>
+<div class="content" >
+      <p>
+        <h3></h3>
         <p>
-          Depending on the number <i> x </i> you'll choose below, <b>it'll get the results of the <i> x </i> most recently played COTD by the all of the players</b> <i>(if they played that many at least)</i>, we <b>remove the 10% best and worst placements</b> (method commonly used in statitics to prevent outliers to impact the means to much <a href="https://en.wikipedia.org/wiki/Truncated_mean" target="_blank">wikipedia</a>), and then <b>the average position is calculated for all of the players</b>, they are then ranked accordingly.  
-        </p>
-        <br>
+          Depending on the number <i> x </i> you'll choose below, <b>it'll get the results of the <i> x </i> played COTD by all of the players</b> <i>(if they played that many at least)</i>, <b>we remove the 10% best and worst placements </b> allowing to reflect better the actual "level" of a player (this method is commonly used in statitics to prevent outliers to impact the means to much <a href="https://en.wikipedia.org/wiki/Truncated_mean" target="_blank">wikipedia</a>). Then <b>the average position is calculated for all of the players and they are ranked accordingly</b>.
+        </p>  
         <p>
-          Ranks are <b>based on the relative position in % as this allows to take into account the variation of the total number of players per cotd</b> (which varies from day to day ^-^) <i>(for exemple: someone who placed 500th out of 1000 player (top 50%) has actually performed worst than someone else who would have finished 600th out of 1500 players (top 40%))</i>
+          Ranks are <b>based on the relative position in % as this allows to take into account the variation of the total number of players per cotd</b> (which varies from day to day ¯\_(ツ)_/¯ ) <i>(for exemple: someone who placed 500th out of 1000 player (top 50%) has actually performed worst than someone else who would have finished 600th out of 1500 players (top 40%))</i>
         </p>
-        <br>
-        <table style="width: 100%" id="selectCOTD">
-          <th onclick="showXRanking('10')">10</th>
-          <th onclick="showXRanking('20')">20</th>
-          <th onclick="showXRanking('30')">30</th>
-          <th onclick="showXRanking('40')">40</th>
-          <th onclick="showXRanking('50')">50</th>
-          <th onclick="showXRanking('60')">60</th>
-          <th onclick="showXRanking('70')">70</th>
-          <th onclick="showXRanking('80')">80</th>
-          <th onclick="showXRanking('90')">90</th>
-          <th onclick="showXRanking('100')">100</th>
-          <th onclick="showXRanking('110')">110</th>
-          <th onclick="showXRanking('120')">120</th>
-        </table>
+        <p>
+          Additionnaly you can choose to <b>see the results on the most recent cotd played by the players or the best COTD results of the players.</b>
+        </p>
     </p>
+    </div>
+    </section>
+    <section>
+      <p id="dataStatus">Gathering data...</p>
+        <table style="width: 100%; padding:0px;margin: 0px" id="selectType">
+          <tr >
+              <th onclick="changeType('last')"  id="last">Show recent results</th>
+              <th onclick="changeType('best')"  id="best">Show best overall results</th>
+          </tr>
+        </table>
+        <table style="width: 100%" id="selectCOTD">
+
+<tr >
+          <th onclick="showXRanking('10')" id="10">10</th>
+          <th onclick="showXRanking('20')" id="20">20</th>
+          <th onclick="showXRanking('30')" id="30">30</th>
+          <th onclick="showXRanking('40')" id="40">40</th>
+          <th onclick="showXRanking('50')" id="50">50</th>
+          <th onclick="showXRanking('60')" id="60">60</th>
+          <th onclick="showXRanking('70')" id="70">70</th>
+          <th onclick="showXRanking('80')" id="80">80</th>
+          <th onclick="showXRanking('90')" id="90">90</th>
+          <th onclick="showXRanking('100')" id="100">100</th>
+          <th onclick="showXRanking('110')" id="110">110</th>
+          <th onclick="showXRanking('120')" id="120">120</th>
+          </tr>
+        </table>
     
     <div id="tableCOTD">
       
     </div>
-
     </section>
+
+    
 
 
     <div class="footer-dark">
