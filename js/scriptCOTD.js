@@ -44,12 +44,15 @@ RankingButton.addEventListener("click", function() {
 function changeType(argument) {
     window.type=argument;
     showXRanking(window.toppp)
-    console.log(window.type)
     if (window.type == "last"){
         th = document.getElementById("last")
         th.setAttribute("style", "background-color: lightblue;")
 
         document.getElementById("last").onmouseover = function() 
+    {
+        this.style.backgroundColor = "lightblue";
+    }
+    document.getElementById("last").onmouseleave = function() 
     {
         this.style.backgroundColor = "lightblue";
     }
@@ -74,6 +77,10 @@ function changeType(argument) {
     {
         this.style.backgroundColor = "lightblue";
     }
+    document.getElementById("best").onmouseleave = function() 
+    {
+        this.style.backgroundColor = "lightblue";
+    }
         th = document.getElementById("last")
         th.setAttribute("style", "background-color: lightgrey;")
 
@@ -92,7 +99,16 @@ function changeType(argument) {
 }
 function showXRanking(x){
     window.toppp = x;
-    console.log(x)
+    th = document.getElementById("120")
+    th.setAttribute("style", "background-color: lightgrey;")
+    th.onmouseleave = function() 
+    {
+        this.style.backgroundColor = "lightgrey";
+    }
+    th.onmouseover = function() 
+    {
+        this.style.backgroundColor = "lightgreen";
+    }
 
     th = document.getElementById(window.type)
     th.setAttribute("style", "background-color: lightblue;")
@@ -124,6 +140,8 @@ function showXRanking(x){
     
 
     
+
+    
     //console.log(window.type)
     if (window.type=="last"){
         text = "lastly played"
@@ -133,7 +151,7 @@ function showXRanking(x){
         div = document.getElementById("tableCOTD")
         var top = json["last"][x]
 
-        div.innerHTML = "<p style:'text-align:center;'>Leaderboard  on " + x + " COTD played by "+String(top.length)+" players. Ranked by "+ text+ " COTD.</p>" 
+        div.innerHTML = "<br><b style='text-align:center; width:100%;'>Leaderboard  on " + x + " COTD. "+String(top.length)+" players ranked by "+ text+ " COTD.</b>" 
 
         
 
@@ -217,7 +235,7 @@ function showXRanking(x){
 
         var top = json["best"][x]
 
-        div.innerHTML = "<p style:'text-align:center;'>Leaderboard  on " + x + " COTD played by "+String(top.length)+" players. Ranked by "+ text+ " COTD.</p>" 
+        div.innerHTML = "<br><b style='text-align:center; width:100%;'>Leaderboard  on " + x + " COTD. "+String(top.length)+" players ranked by "+ text+ " COTD.</b>" 
 
         
 
@@ -292,6 +310,9 @@ function showXRanking(x){
         //divContainerr.innerHTML = "";
         //playerdiv.appendChild(divo)   
 
-}}
+}else{
+    div.innerHTML = "No player has played that much COTD yet lol"
+}
+}
 }
 
