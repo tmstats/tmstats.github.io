@@ -90,7 +90,7 @@ function showXRanking(x){
         //divContainerr.innerHTML = "";
         //playerdiv.appendChild(divo)   
 }else{
-    div.innerHTML = "No player have played that much COTD lol"
+    div.innerHTML = "No player has played that much COTD yet lol"
 }
 }
 
