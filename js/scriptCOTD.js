@@ -7,7 +7,7 @@ var URL = "https://trackmaniastats.herokuapp.com/api/COTDRankings";
 $.getJSON(URL, function(json) {
 window.json = json
  p = document.getElementById("dataStatus")
- p.innerHTML = "Data collected, you can now use the leaderboard."
+ p.innerHTML = "Data collected, you can now use the leaderboard. <i>(use ctrl+f to search for a player for now)"
  showXRanking(window.toppp )
 });
 
