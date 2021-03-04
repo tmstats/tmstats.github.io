@@ -7,14 +7,7 @@
     <link rel='shortcut icon' type='image/x-icon' href='favicon.ico' />
     <link rel="icon" type="image/png" href="favicon.png"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
-    <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-NJTC4BE7DB');
-</script>
-<style type="text/css">
+    <style type="text/css">
         html, 
 body {
     height: 100%;
@@ -221,16 +214,16 @@ h2 {
 
 
     <h1>Welcome to TrackmaniaStats</h1>
-    <i style="color: white; text-align: center;"><a href="https://tmstats.github.io/">Go back to main page</a></i>
+    <i style="color: white; text-align: center;">Updated daily at 20:00 CET (last added cotd: <i id="dayLastAddedCOTD">refresh</i>)</i>
     </div>
     <section id ="COTDRankings">
     <h2>COTD Rankings!</h2>
     <p id="dataStatus">Gathering data...</p>
 
     <p>
-        <h3>How does this leaderboard work?</h3>
+        <h3>How does this leaderboard works?</h3>
         <b>
-          Depending on the number <i> x </i> you'll choose below, it'll get the results of the <i> x </i> most recently played COTD by the all of the players <i>(if they played that many at least)</i>, we remove the 10% best and worst placement (method commonly used in statitics to prevent outliers to impact the mean to much <a href="https://en.wikipedia.org/wiki/Truncated_mean" target="_blank">wikipedia</a>), and then the average position is calculated for all of the players, tehy are then ranked accordingly. 
+          Depending on the number <i> x </i> you'll choose below, it'll calculate the average position of all the players on their last <i> x </i> COTDs (if they played that many at least), and rank the players accordingly. 
         </b>
         <br></br>
         <p>
