@@ -171,6 +171,7 @@ function showXRanking(x){
 
         // TABLE ROW.
             var tr = table.insertRow(-1); 
+            tr.setAttribute("style", "font-size:18px;");
 
             for (var i = 0; i < col.length; i++) {
             var th = document.createElement("th");      // TABLE HEADER.
@@ -187,11 +188,14 @@ function showXRanking(x){
             var tr = table.insertRow(-1);  
 
             var td = document.createElement("td");    
-            td.innerHTML = i+1;
+            tr.setAttribute("style", "max-width:30px");
+            td.innerHTML = "<b>"+String(i+1)+"</b>";
             tr.appendChild(td);
 
             var td = document.createElement("td");  
+            tr.setAttribute("style", "width:20px;");
             var a = document.createElement("a");
+            a.setAttribute("style", "width:20px;");
             a.target = "_blank";
             a.style.color = "blue";
             a.href = "https://tmstats.github.io/#"+ top[i].playerName ;
@@ -272,7 +276,7 @@ function showXRanking(x){
             var tr = table.insertRow(-1);  
 
             var td = document.createElement("td");    
-            tr.setAttribute("style", "max-width:30px");
+            tr.setAttribute("style", "width:10px");
             td.innerHTML = "<b>"+String(i+1)+"</b>";
             tr.appendChild(td);
 
