@@ -18,7 +18,7 @@ function showXRanking(x){
 
         var top = json[x]
 
-        div.innerHTML = "<p style:'text-align:center;'>Leaderboard on the last " + x + " COTD played by the players (they are "+String(top.length)+")</p>" 
+        div.innerHTML = "<p style:'text-align:center;'>Leaderboard on the last " + x + " COTD played by the players (they are "+String(top.length)+").</p>" 
 
         
 
