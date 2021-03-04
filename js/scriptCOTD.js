@@ -16,7 +16,7 @@ function showXRanking(x){
 
         div = document.getElementById("tableCOTD")
 
-        div.innerHTML = "<p style:'text-align:center;'>Leaderboard on the last " + x + " COTD played buy the players</p>" 
+        div.innerHTML = "<p style:'text-align:center;'>Leaderboard on the last " + x + " COTD played by the players</p>" 
 
         var top = json[x]
 

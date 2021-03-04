@@ -155,7 +155,6 @@ h2 {
     border-collapse: collapse;
     margin: 25px 0;
     font-size: 0.9em;
-    min-width: 400px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
 
@@ -224,7 +223,7 @@ h2 {
     <p>
         <h3>How does this leaderboard works?</h3>
         <b>
-          Depending on the number <i> x </i> you'll choose below, it'll calculate the average position of the player on their last <i> x </i> COTDs, and rank the players accordingly. 
+          Depending on the number <i> x </i> you'll choose below, it'll calculate the average position of all the players on their last <i> x </i> COTDs (if they played that many at least), and rank the players accordingly. 
         </b>
         <br></br>
         <p>
@@ -244,8 +243,6 @@ h2 {
           <th onclick="showXRanking('100')">100</th>
           <th onclick="showXRanking('110')">110</th>
           <th onclick="showXRanking('120')">120</th>
-          <th onclick="showXRanking('130')">130</th>
-          <th onclick="showXRanking('140')">140</th>
         </table>
     </p>
     
