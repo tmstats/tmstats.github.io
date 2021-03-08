@@ -358,9 +358,15 @@ if (document.getElementById(name) == null){
             th.innerHTML = "Pseudo";
             tr.appendChild(th);
 
+            
             var th = document.createElement("th");      // TABLE HEADER.
-            th.innerHTML = "Used since";
+            th.innerHTML = "used from";
             tr.appendChild(th);
+
+            var th = document.createElement("th");      // TABLE HEADER.
+            th.innerHTML = "used until";
+            tr.appendChild(th);
+
 
 
         
@@ -379,6 +385,16 @@ if (document.getElementById(name) == null){
             var td = document.createElement("td");      // TABLE HEADER.
             td.innerHTML = json.playerNames[i].sinceDate;
             tr.appendChild(td);
+            
+if (i!=o){
+            var td = document.createElement("td");      // TABLE HEADER.
+            td.innerHTML = json.playerNames[i+1].sinceDate;
+            tr.appendChild(td);
+}else{
+var td = document.createElement("td");      // TABLE HEADER.
+            td.innerHTML = "now";
+            tr.appendChild(td);
+}
 
         }
 
