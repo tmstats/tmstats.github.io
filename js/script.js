@@ -109,9 +109,9 @@ $.getJSON('https://trackmaniastats.herokuapp.com/api/numberNewCOTDPlayers', func
 $.getJSON('https://trackmaniastats.herokuapp.com/api/dayLastAddedCOTD', function(json) {
       
         var p = document.getElementById("dayLastAddedCOTD");
-        str1 = "last added cotd: ";
-        str2 = str1.concat(json.dayLastAddedCOTD);
-        p.innerHTML = str2;
+        str11 = json.dayLastAddedCOTD;
+        str22 = "last added cotd: " + str11;
+        p.innerHTML = str22;
 
 });
 
