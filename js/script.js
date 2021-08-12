@@ -721,7 +721,10 @@ function cotdResults(data) {
         serverRank = data.results.cotd[i].serverRank
     
         indexLabel =  String(serverRank)
-        if (indexLabel=="DNF"){indexLabel=""}
+        
+        if (indexLabel=="DNF"){indexLabel=""
+}else if (parseInt(indexLabel,10)> 8){indexLabel=""}
+     
 
         if (serverRank == "DNF"){
             color="rgb(30, 30, 30)"
