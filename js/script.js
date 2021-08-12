@@ -1,3 +1,12 @@
+$(document).ready(function() {
+  $(window).keydown(function(event){
+    if(event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
+  });
+});
+
 function sleep(milliseconds) {
   const date = Date.now();
   let currentDate = null;
@@ -6,7 +15,6 @@ function sleep(milliseconds) {
   } while (currentDate - date < milliseconds);
 }
 
-var entry = window.location.hash;
 /*
 p=-1
 newName = []
@@ -54,17 +62,38 @@ $.getJSON('https://trackmaniastats.herokuapp.com/api/searchPlayer/'+naame, funct
 
 //}
 */
-naame = entry.slice(1)
+var entry = window.location.hash;
+playerID = entry.slice(1)
 
+seeProfile(playerID)
+/*
 $.getJSON('https://trackmaniastats.herokuapp.com/api/searchPlayer/'+naame, function(json) {
 
         playerID = json[naame.toLowerCase()]
         seeProfile(playerID)
 
 });
+*/
 
+/*
+var entry = window.location.hash;
+naame = entry.slice(1)
 
+console.log(entry)
+IDs = []
+while (entry.length > 36){
+    IDs.push(entry.slice(1,37))
+    entry = entry.slice(37,)
+    console.log(IDs)
+    console.log(entry)
+}
 
+for (var oo=0; oo <= IDs.length; oo++){
+    console.log("aaaaaaaaaaa")
+    pausecomp(1000);
+    seeProfile(IDs[oo])
+};
+*/
 
 
 //setup before functions
@@ -90,22 +119,6 @@ $input.on('keydown', function () {
 });
 
 
-
-$.getJSON('https://trackmaniastats.herokuapp.com/api/totalPlayer', function(json) {
-      
-        var p = document.getElementById("totalPlayer");
-        p.innerHTML = json.totalPlayer;
-
-});
-
-
-$.getJSON('https://trackmaniastats.herokuapp.com/api/numberNewCOTDPlayers', function(json) {
-      
-        var p = document.getElementById("numberNewPlayers");
-        p.innerHTML = json.numberNewCOTDPlayers;
-
-});
-
 $.getJSON('https://trackmaniastats.herokuapp.com/api/dayLastAddedCOTD', function(json) {
       
         var p = document.getElementById("dayLastAddedCOTD");
@@ -114,6 +127,23 @@ $.getJSON('https://trackmaniastats.herokuapp.com/api/dayLastAddedCOTD', function
         p.innerHTML = str22;
 
 });
+
+
+$.getJSON('https://trackmaniastats.herokuapp.com/api/totalPlayer', function(json) {
+      
+        var p = document.getElementById("totalPlayer");
+        p.innerHTML = json.totalPlayer;
+
+});
+
+/*
+$.getJSON('https://trackmaniastats.herokuapp.com/api/numberNewCOTDPlayers', function(json) {
+      
+        var p = document.getElementById("numberNewPlayers");
+        p.innerHTML = json.numberNewCOTDPlayers;
+
+});
+
 
 
 
@@ -182,7 +212,7 @@ $.getJSON('https://trackmaniastats.herokuapp.com/api/newNamePlayers', function(j
         p.innerHTML = p.innerHTML + "<br></br>"
 });
 
-
+*/
 
 function wait(playerID){
 $.getJSON('https://trackmaniastats.herokuapp.com/api/playerProfiles/'.concat(playerID), function(data) {
@@ -294,10 +324,11 @@ URL = "https://trackmaniastats.herokuapp.com/api/playerProfiles/"+playerID
 $.getJSON(URL, function(json) {
 
 name = json.playerNames[json.playerNames.length - 1].playerName
-if (document.getElementById(name) == null){
+
+if (document.getElementById(playerID) == null){
 
         var playerdiv = document.createElement("div")
-        playerdiv.setAttribute("id", name);
+        playerdiv.setAttribute("id", playerID);
         playerdiv.setAttribute("class", 'players');
 
         var p = document.createElement("p")
@@ -316,25 +347,29 @@ if (document.getElementById(name) == null){
         playerdiv.appendChild(p)
         
         var h3 = document.createElement("h3")
-        h3.setAttribute("style", "font-weight:bold;");
+        h3.setAttribute("style", "font-weight:bold; text-align:center;");
         h3.innerHTML =name+"'s profile"
         //$(document.getElementById("playerProfile").appendChild(h3))
         playerdiv.appendChild(h3)
 
         var p = document.createElement("p")
-        text = 'Trackmania.io profile: <a target="_blank" href="https://trackmania.io/#/player/' + playerID +'">https://trackmania.io/#/player/'+ playerID+ '</a>'
+        text = 'Trackmania.io profile : <a target="_blank" href="https://trackmania.io/#/player/' + playerID +'">https://trackmania.io/#/player/'+ playerID+ '</a>'
+        p.setAttribute("style", "text-align:center;");
         p.innerHTML = text
         //$(document.getElementById("playerProfile").appendChild(p))
         playerdiv.appendChild(p)
 
         var h4 = document.createElement("h4")
         h4.innerHTML ="Pseudo history:"
+        h4.setAttribute("style", "text-align:center;");
         //$(document.getElementById("playerProfile").appendChild(h4))
         playerdiv.appendChild(h4)
 
         var div = document.createElement("div")
-        profilepath = name+"Profile"
+        profilepath = playerID+"Profile"
         div.setAttribute("id", profilepath);
+
+        div.setAttribute("style", "margin: auto; width: 50%;");
         //$(document.getElementById("playerProfile").appendChild(div))
         playerdiv.appendChild(div)
 
@@ -350,7 +385,8 @@ if (document.getElementById(name) == null){
 
         // CREATE DYNAMIC TABLE.
         var table = document.createElement("table");
-
+        table.setAttribute("style", "margin: auto; width: 50%;");
+    
         // CREATE HTML TABLE HEADER ROW USING THE EXTRACTED HEADERS ABOVE.
 
         // TABLE ROW.
@@ -405,7 +441,14 @@ var td = document.createElement("td");      // TABLE HEADER.
         //divContainer.innerHTML = "";
         div.appendChild(table);
 
+        var p = document.createElement("p")
+        
+        p.innerHTML ="<br>"
 
+        //$(document.getElementById("playerProfile").appendChild(h3))
+        playerdiv.appendChild(p)
+
+/*
         var h3 = document.createElement("h3")
         
         h3.innerHTML ="<br>CotD results:"
@@ -414,15 +457,15 @@ var td = document.createElement("td");      // TABLE HEADER.
         //$(document.getElementById("playerProfile").appendChild(h3))
         playerdiv.appendChild(h3)
 
-    
+    */
         var divv = document.createElement("div")
-        divv.setAttribute("style", "height: 370px; max-width: 920px; margin: 0px auto;");
-        id = "chartContainer"+ name
+        divv.setAttribute("style", "height: 400px; width: 100%; margin: 0px auto;");
+        id = "chartContainer"+ playerID
         divv.setAttribute("id", id);
         playerdiv.appendChild(divv)
 
         var p = document.createElement("p")
-        p.innerHTML ="<br>green → top 8 ; gold → top 24 ; silver → top 48 ; bronze → top 64"
+        p.innerHTML ="<br>green → top 8 ; gold → top 24 ; silver → top 48 ; bronze → top 64<br>(average on last 10 cotd is excluding the best and worse result in the 10)"
         p.setAttribute("style", "text-align: center;");
 
         var pp = document.createElement("p")
@@ -435,13 +478,13 @@ var td = document.createElement("td");      // TABLE HEADER.
         
 
         var divvv = document.createElement("div")
-        divvv.setAttribute("style", "height: 370px; max-width: 920px; margin: 20px auto;");
-        id = "chartContainer2"+ name
+        divvv.setAttribute("style", "height: 400px; width: 100%; margin: 20px auto;");
+        id = "chartContainer2"+ playerID
         divvv.setAttribute("id", id);
         playerdiv.appendChild(divvv)
 
         var div = document.createElement("div")
-        id = "cotdResults" + name
+        id = "cotdResults" + playerID
         div.setAttribute("id", id);
         //$(document.getElementById("playerProfile").appendChild(div))
         playerdiv.appendChild(div)
@@ -450,7 +493,7 @@ var td = document.createElement("td");      // TABLE HEADER.
 
         var p = document.createElement("p")
         
-        p.innerHTML ="<br><p id=\"newPlayers\" class=\"button_cont\"> <a class=\"example_f\" onclick=\"showrawData(\'"+name+"\')\" rel=\"nofollow\"><span>Show raw data (old format):</a></p>"
+        p.innerHTML ="<br><p id=\"newPlayers\" class=\"button_cont\"> <a class=\"example_f\" onclick=\"showrawData(\'"+playerID+"\')\" rel=\"nofollow\"><span>Show raw data (old format):</a></p>"
         //$(document.getElementById("playerProfile").appendChild(h3))
         playerdiv.appendChild(p)
 
@@ -499,7 +542,7 @@ var td = document.createElement("td");      // TABLE HEADER.
         //divContainerr.innerHTML = "";
         table.style.display = 'none';
 
-        table.id = "RawData"+name
+        table.id = "RawData"+playerID
         div.appendChild(table);
 
         playerdiv.appendChild(div)
@@ -516,11 +559,16 @@ var td = document.createElement("td");      // TABLE HEADER.
         //curentLocation = window.location.href 
         //newLocation = curentLocation + "#"+name
 
-        path = "#"+name
+        path = "#"+playerID
         //path = curentLocation + "#"+name
-        window.location.href = path ;
+        //oldPath = window.location.href
 
-        showGraphs(playerID,name)
+
+        window.location.href = path;
+        //window.location.href = oldPath + path ;
+
+
+        showGraphs(playerID,playerID)
         //$("#playerID").html(json.playerID);
     
 
@@ -562,8 +610,16 @@ var chart = null;
 var dataPoints = [];
 var dataPoints2 = [];
 
+//var today = new Date();
+//var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+//var date = "2021-08-12"
+//console.log((parseInt(today.getDate(),10)-10).toString())
+//var minDate = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+(parseInt(today.getDate(), 10)-10).toString();;
+//var minDate = "2021-07-12"
+//console.log(date, minDate)
 function showGraphs(playerID,name){
 
+var worstPositionAverage = 10;
 chart = new CanvasJS.Chart("chartContainer"+name, {
     exportEnabled: false,
     animationEnabled: true,
@@ -572,13 +628,17 @@ chart = new CanvasJS.Chart("chartContainer"+name, {
     theme: "light2",
 
     title: {
-        text: "COTDs result history (zoom enabled)"
+        text: "COTDs result history"
+    },
+    toolTip: {
+        shared: true
     },
     axisY: {
         title: "Placements",
         titleFontSize: 24,
         viewportMinimum: 0,
-        
+        //includeZero: true,
+        //viewportMaximum: worstPositionAverage,
         },
     axisY2: {
         title: "Clutch - Units",
@@ -594,7 +654,10 @@ chart = new CanvasJS.Chart("chartContainer"+name, {
     },
      axisX:{
         reversed:  true,
+        //viewportMinimum: new Date(minDate),
+        //viewportMaximum: new Date(date),
         
+
         //testt: testt= "2020-12-10",
         //viewportMinimum: new Date(testt),
 
@@ -634,7 +697,7 @@ chart2 = new CanvasJS.Chart("chartContainer2"+name, {
         type: "bar",
         //yValueFormatString: "#th place",
         indexLabelPlacement: "outside",
-        toolTipContent: "Average position: <b>{averagePosi}</b>",
+        toolTipContent: "Average position: <b>{averagePosi}</b>{text}",
         color: "grey",
         dataPoints: dataPoints2,
         color: "{color}"
@@ -653,6 +716,7 @@ $.getJSON("https://trackmaniastats.herokuapp.com/api/cotdResultsServers/"+player
 
 function cotdResults(data) {   
     var maxY = 0;
+    worstPositionAverage = 100
     for (var i = 0; i < data.results.cotd.length; i++) {
         serverRank = data.results.cotd[i].serverRank
     
@@ -718,6 +782,7 @@ function cotdResults(data) {
             server: data.results.cotd[i].server,
             date: date,
             add: add,
+            worstPositionAverage:worstPositionAverage,
             addOverall: addOverall,
             indexLabel: indexLabel,
             maxY:maxY
@@ -736,6 +801,22 @@ function cotdResults(data) {
 function cotdResultsServers(data) { 
     for (var i = 0; i < data.servers.length; i++) {
         averagePosi = data.servers[i].averagePosi
+        bestPosition = data.servers[i].bestPosition
+        numberBestPosition = data.servers[i].numberBestPosition
+
+        lastDigit = bestPosition%10
+
+        if (lastDigit == 3){
+            add = "rd"
+        } else if (lastDigit == 2) {
+            add = "nd"
+        } else if (lastDigit == 1){
+            add = "st"
+        } else if (bestPosition != "None"){
+            add = "th"
+        }else{
+            add = ""
+        }
 
         if (averagePosi == "DNF"){
             color="rgb(30, 30, 30)"
@@ -754,14 +835,39 @@ function cotdResultsServers(data) {
         indexLabel = String(y)
         if (indexLabel == "0"){indexLabel=""}
 
-        dataPoints2.push({
+        
+
+        if (data.servers[i].iteration == 1){
+            text = ""
+            dataPoints2.push({
+                x: data.servers[i].server,
+                y: y,
+                averagePosi: averagePosi,
+                color: color,
+                indexLabel: indexLabel,
+                text: text
+        });
+        }else{
+            if (numberBestPosition == 1){
+                 text = "<br> Best placement : <b>"+bestPosition +add +"</b> (<b>"+numberBestPosition+"</b> time)"
+             }else
+        {
+             text = "<br> Best placement : <b>"+bestPosition +add +"</b> (<b>"+numberBestPosition+"</b> times)"
+        }
+           
+            dataPoints2.push({
             x: data.servers[i].server,
             y: y,
             averagePosi: averagePosi,
+            text: text,
             color: color,
             indexLabel: indexLabel
         });
+        }
+
+        
     }
+
     chart2.render(); 
     clear2()
 }
@@ -779,17 +885,20 @@ function calculateMovingAverage(chart,days) {
       markerSize: 0,
       visible: false,
       color: "blue",
-      name: "show moving average on 10 cotd",
+      name: "average on last 10 cotd",
       showInLegend: true,
       yValueFormatString: "#,##0.00",
       dataPoints: []
     });
     var total;
     for(var i = numOfDays; i < chart.options.data[0].dataPoints.length; i++) {
-      total = 0;
+      totall = [];
       for(var j = (i - numOfDays); j < i; j++) {
-        total += chart.options.data[0].dataPoints[j].y;
+        totall.push(chart.options.data[0].dataPoints[j].y);
       }
+      totall.sort((a,b)=>a-b);
+      total = eval(totall.slice(1,-1).join('+'))
+
       chart.options.data[1].dataPoints.push({
         x: chart.options.data[0].dataPoints[i].x,
         y: total / numOfDays
@@ -855,7 +964,7 @@ var nbOpenDiclaimer = 0;
   });
 
 
-
+/*
 var FunFactsButton = document.getElementById("FunFactsButton");
 var i;
 
@@ -881,5 +990,5 @@ var nbOpenFunFacts = 0;
     } 
   });
 
-
+*/
 
