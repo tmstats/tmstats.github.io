@@ -347,19 +347,23 @@ if (document.getElementById(playerID) == null){
         playerdiv.appendChild(p)
         
         var h3 = document.createElement("h3")
-        h3.setAttribute("style", "font-weight:bold; text-align:center;");
-        h3.innerHTML =name+"'s profile"
+        h3.setAttribute("style", "font-weight:bold; text-align:center; text-decoration:underline; padding:100px;");
+        text = '<a target="_blank" style="font-weight:bold; text-decoration:underline" href="https://trackmania.io/#/player/' + playerID +'">'+ name+'</a>'+"'s profile"
+        h3.setAttribute("style", "text-align:center;");
+        h3.innerHTML = text
+
+        //h3.innerHTML =name+"'s profile"
         //$(document.getElementById("playerProfile").appendChild(h3))
         playerdiv.appendChild(h3)
-
+/*
         var p = document.createElement("p")
         text = 'Trackmania.io profile : <a target="_blank" href="https://trackmania.io/#/player/' + playerID +'">https://trackmania.io/#/player/'+ playerID+ '</a>'
         p.setAttribute("style", "text-align:center;");
         p.innerHTML = text
         //$(document.getElementById("playerProfile").appendChild(p))
         playerdiv.appendChild(p)
-
-        var h4 = document.createElement("h4")
+*/
+        var h4 = document.createElement("h5")
         h4.innerHTML ="Pseudo history:"
         h4.setAttribute("style", "text-align:center;");
         //$(document.getElementById("playerProfile").appendChild(h4))
@@ -369,7 +373,7 @@ if (document.getElementById(playerID) == null){
         profilepath = playerID+"Profile"
         div.setAttribute("id", profilepath);
 
-        div.setAttribute("style", "margin: auto; width: 50%;");
+        div.setAttribute("style", "margin: auto");
         //$(document.getElementById("playerProfile").appendChild(div))
         playerdiv.appendChild(div)
 
@@ -385,7 +389,7 @@ if (document.getElementById(playerID) == null){
 
         // CREATE DYNAMIC TABLE.
         var table = document.createElement("table");
-        table.setAttribute("style", "margin: auto; width: 50%;");
+        table.setAttribute("style", "margin: auto");
     
         // CREATE HTML TABLE HEADER ROW USING THE EXTRACTED HEADERS ABOVE.
 
