@@ -719,8 +719,8 @@ $.getJSON("https://trackmaniastats.herokuapp.com/api/cotdResultsServers/"+player
 
 
 function cotdResults(data) {   
-    var maxY = 0;
-    worstPositionAverage = 100
+    //var maxY = 0;
+    maxY = data.stats.cotd["20percentWostPositionAverage"]
     for (var i = 0; i < data.results.cotd.length; i++) {
         serverRank = data.results.cotd[i].serverRank
     
@@ -758,10 +758,12 @@ function cotdResults(data) {
 
 
         globalRank = data.results.cotd[i].globalRank
+        /*
         if (globalRank > maxY && indexLabel !=  ""){
             maxY = globalRank
             //console.log(maxY)
         }
+        */
 
         lastDigitOverall = globalRank%10
 
@@ -789,7 +791,6 @@ function cotdResults(data) {
             server: data.results.cotd[i].server,
             date: date,
             add: add,
-            worstPositionAverage:worstPositionAverage,
             addOverall: addOverall,
             indexLabel: indexLabel,
             maxY:maxY
