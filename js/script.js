@@ -434,7 +434,8 @@ if (i!=o){
             tr.appendChild(td);
 }else{
 var td = document.createElement("td");      // TABLE HEADER.
-            td.innerHTML = "now";
+            //td.innerHTML = "now";
+            td.innerHTML = json.results.cotd[json.results.cotd.length-1].date
             tr.appendChild(td);
 }
 
