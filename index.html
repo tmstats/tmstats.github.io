@@ -53,13 +53,16 @@
    font-size: 1rem;
    color: #11998e;
 }
+.player{
+  margin-bottom: 10px;
+  font-weight: 700;
+}
  .player:focus {
    padding-bottom: 6px;
-   margin-bottom: 5px;
-   font-weight: 700;
    border-width: 3px;
    border-image: linear-gradient(to right, #11998e, #38ef7d);
    border-image-slice: 1;
+}
 }
  .player:focus ~ .form__label {
    position: absolute;
@@ -89,8 +92,8 @@ body {
 section {
   background-color:#c2cad0;
   text-align: justify;
-  margin-top: 30px;
-  margin-bottom: 20px;
+  margin-top: 2em;
+  margin-bottom: 2em;
   padding: 25px;
 }
 
@@ -331,10 +334,11 @@ input {
 <div class="content" >
   <p style="display: block; font-size: 5px;"></p>
     <p>
-      On this website, everyone can see their past results on the Cups of the Day (a knock-out daily competition hosted by Nadeo). <br>You can check you own profile or the one of some other, please do not use this tool to, form an opinion or to make fun, of somebody (because some players just play the cotd for fun ^^'). <br>To see a profile, enter a name (or just a part of a name), and you will see all corresponding players matching your search. Then to see someone's profile, click on the see profile button.</p>
+      On this website, everyone can see their past results on the Cups of the Day (a knock-out daily competition hosted by Nadeo on Trackmania). <br>You can check you own profile and the one the others, please considered that some players just just play the cotd for fun ^^'.<br>To see a profile, enter a name (or just a part of a name), and you will see all corresponding players matching your search. Then to see someone's profile, click on the see profile button.</p>
 <p>You can try in alpha the rankings page <a href="https://tmstats.github.io/COTD-ranking#last10">https://tmstats.github.io/COTD-ranking</a> 👀</p>
 </div>
     </section>
+
 <!--
 
 
@@ -353,11 +357,11 @@ input {
         <p>On the last Cup of the Day, we had <b id="numberNewNamePlayers">...</b> players that changed their nickname since their last COTD.</p>
         <p id="newNamePlayers" class="button_cont"> <a class="example_f" onclick="showNewNamePlayers()" rel="nofollow"><span>Show players that changed their pseudo</a> </p>
 
--->
+
 
 </div>
     </section>
-
+-->
 
     <section id ="playerSearch">
     
@@ -376,18 +380,26 @@ input {
 
     <p id="numberofresult"></p>
 
-    <div class="playerSearchResult">
+    <div class="playerSearchResult" id="playerSearchResult">
       <p id="showData"></p>
     </div>
     
     </section>
 
     <section id ="playerProfile">
-
     </section>
 
+   <section id ="FunFacts"  style="padding: 0px;">
+      <button class="collapsible"  id="FunFactsButton"><h2 ><i>COTDs Stats</i><i id="plusMinusFunfacts" style="float: right; padding-right: 20px;">+</i><h2></button> 
+        <div class="content" >
+          <p style="text-align: center; margin:20px;"><i>coming soon 👀</i></p>
+</div>
+    </section>
+
+
+
     <section id ="Notes">
-        <h2>Notes:</h2>
+        <h3 style="font-style: normal; text-decoration: underline;">Notes :</h3>
               <p>Only the main COTD (at 7pm CEST) is taken into account. And only the first 32 servers of COTD (top 2048 players) are fetched, as servers after that are not available on trackmania.io :(</p>
         <p>Pseudo were first tracked the 9th of feb. 2021, so logins before that are not available (Also keep in mind that, if you change your pseudo, it will only update if you play a new cotd). More things will eventually come (like A08 cup results). <i style="text-decoration: line-through">Or also, a graph visualisation (better than table...)</i> --> Added. </p>
         <p>If you have some request of things that you would like to see, you can contact me on Discord (see below)</p>

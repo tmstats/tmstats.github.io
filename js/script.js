@@ -268,8 +268,9 @@ $.getJSON('https://trackmaniastats.herokuapp.com/api/searchPlayer/'.concat(strin
         }else{
             string =  ""
         }
+        p.setAttribute("style", "text-align:center;")
         p.innerHTML = string;
-        //p.setAttribute("class", "tooltip")
+        
         /*p.setAttribute("style", "position: relative;display: inline-block;border-bottom: 1px dotted black;")
         var span = document.createElement("span");
         span.setAttribute("class", "tooltiptext")
@@ -369,6 +370,7 @@ function CreateTableFromJSON(json) {
 
 
 function seeProfile(playerinfo){
+
     playerID = playerinfo.slice(0,36)
     playerName = playerinfo.slice(37,playerinfo.length)
     //console.log(playerName)
@@ -377,8 +379,9 @@ URL = "https://trackmaniastats.herokuapp.com/api/playerProfiles/"+playerID
 $.getJSON(URL, function(json) {
 
 name = json.playerNames[json.playerNames.length - 1].playerName
+console.log(document.getElementById(name))
 
-if (document.getElementById(playerID) == null){
+if (document.getElementById(name) == null){
 
         var playerdiv = document.createElement("div")
         playerdiv.setAttribute("id", playerName);
@@ -401,7 +404,7 @@ if (document.getElementById(playerID) == null){
         
         var h3 = document.createElement("h3")
         h3.setAttribute("style", "font-weight:bold; text-align:center; text-decoration:underline; padding:100px;");
-        text = '<a target="_blank" style="font-weight:bold; text-decoration:underline" href="https://trackmania.io/#/player/' + playerID +'">'+ playerName+'</a>'+"'s profile"
+        text = '<a target="_blank" id ="'+name+'"style="font-weight:bold; text-decoration:underline" href="https://trackmania.io/#/player/' + playerID +'">'+ name+'</a>'+"'s profile"
         h3.setAttribute("style", "text-align:center;");
         h3.innerHTML = text
 
@@ -459,7 +462,7 @@ if (document.getElementById(playerID) == null){
             tr.appendChild(th);
 
             var th = document.createElement("th");      // TABLE HEADER.
-            th.innerHTML = "used until";
+            th.innerHTML = "used until (at least)";
             tr.appendChild(th);
 
 
@@ -641,9 +644,22 @@ var td = document.createElement("td");      // TABLE HEADER.
 else{
     path = "#"+name
     window.location.href = path ;
+    path = "#/playerprofile/"+playerName
+        //path = curentLocation + "#"+name
+        //oldPath = window.location.href
+
+
+        window.location.href = path;
 }
-});
+var elem = document.getElementById('showData');
+if(typeof elem !== null && elem !== 'undefined' ) {
+  document.getElementById("showData").innerHTML = "";
+  document.getElementById("numberofresult").innerHTML = "";
+  document.getElementById("player").value='';
 }
+})
+}
+
 
 function showrawData(player){
     
@@ -762,7 +778,7 @@ chart2 = new CanvasJS.Chart("chartContainer2"+name, {
         type: "bar",
         //yValueFormatString: "#th place",
         indexLabelPlacement: "outside",
-        toolTipContent: "Average position: <b>{averagePosi}</b>{text}",
+        toolTipContent: "{text}",
         color: "grey",
         dataPoints: dataPoints2,
         color: "{color}"
@@ -907,7 +923,7 @@ function cotdResultsServers(data) {
         
 
         if (data.servers[i].iteration == 1){
-            text = ""
+            text = "Position : <b>"+averagePosi+"</b>"
             dataPoints2.push({
                 x: data.servers[i].server,
                 y: y,
@@ -918,10 +934,10 @@ function cotdResultsServers(data) {
         });
         }else{
             if (numberBestPosition == 1){
-                 text = "<br> Best placement : <b>"+bestPosition +add +"</b> (<b>"+numberBestPosition+"</b> time)"
+                 text = "Average position : <b>"+averagePosi+"</b><br> Best placement : <b>"+bestPosition +add +"</b> (<b>"+numberBestPosition+"</b> time)"
              }else
         {
-             text = "<br> Best placement : <b>"+bestPosition +add +"</b> (<b>"+numberBestPosition+"</b> times)"
+             text = "Average position : <b>"+averagePosi+"</b><br> Best placement : <b>"+bestPosition +add +"</b> (<b>"+numberBestPosition+"</b> times)"
         }
            
             dataPoints2.push({
@@ -1033,7 +1049,7 @@ var nbOpenDiclaimer = 0;
   });
 
 
-/*
+
 var FunFactsButton = document.getElementById("FunFactsButton");
 var i;
 
@@ -1060,7 +1076,7 @@ var nbOpenFunFacts = 0;
   });
 
 
-*/
+
 /*
 function forceKeyPressUppercase(e)
   {
