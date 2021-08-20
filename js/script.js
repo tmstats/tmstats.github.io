@@ -1,3 +1,6 @@
+$("#player").focus();
+
+
 $(document).ready(function() {
   $(window).keydown(function(event){
     if(event.keyCode == 13) {
@@ -5,6 +8,14 @@ $(document).ready(function() {
       return false;
     }
   });
+});
+
+var input = document.getElementById("player");
+input.addEventListener("keyup", function(event) {
+  if (event.keyCode === 13) {
+   event.preventDefault();
+   document.getElementById("playerBtn").click();
+  }
 });
 
 function sleep(milliseconds) {
@@ -63,9 +74,21 @@ $.getJSON('https://trackmaniastats.herokuapp.com/api/searchPlayer/'+naame, funct
 //}
 */
 var entry = window.location.hash;
-playerID = entry.slice(1)
+url = entry.slice(2)
+//console.log(url.slice(0,13))
+playername = url.slice(14)
+//console.log(playername)
+if (url.slice(0,13)=="playerprofile"){
+    $.getJSON('https://trackmaniastats.herokuapp.com/api/searchPlayer/'+playername, function(json) {
 
-seeProfile(playerID)
+        playerID = json[playername.toLowerCase()]
+        playerinfo = playerID + " " + playername
+        seeProfile(playerinfo)
+
+});
+    
+}
+
 /*
 $.getJSON('https://trackmaniastats.herokuapp.com/api/searchPlayer/'+naame, function(json) {
 
@@ -106,6 +129,7 @@ $input.on('keyup', function () {
     entry = document.getElementById("player");
     //console.log(entry)
     entry = entry.value.length
+
     //console.log(entry)
     if (entry>1) {
           clearTimeout(typingTimer);
@@ -123,12 +147,12 @@ $.getJSON('https://trackmaniastats.herokuapp.com/api/dayLastAddedCOTD', function
       
         var p = document.getElementById("dayLastAddedCOTD");
         str11 = json.dayLastAddedCOTD;
-        str22 = "last added cotd: " + str11;
+        str22 = "last main cotd added : " + str11;
         p.innerHTML = str22;
 
 });
 
-
+/*
 $.getJSON('https://trackmaniastats.herokuapp.com/api/totalPlayer', function(json) {
       
         var p = document.getElementById("totalPlayer");
@@ -136,7 +160,7 @@ $.getJSON('https://trackmaniastats.herokuapp.com/api/totalPlayer', function(json
 
 });
 
-/*
+
 $.getJSON('https://trackmaniastats.herokuapp.com/api/numberNewCOTDPlayers', function(json) {
       
         var p = document.getElementById("numberNewPlayers");
@@ -236,14 +260,25 @@ $.getJSON('https://trackmaniastats.herokuapp.com/api/searchPlayer/'.concat(strin
         var p = document.getElementById("numberofresult");
         var count = 0;
         for (k in json) if (json.hasOwnProperty(k)) count++;
-        string =  count + " player(s) found"
-        p.innerHTML = string;
+        if (count == 1){
 
+            string =  count + " player found"
+        }else if (count > 1){
+            string =  count + " players found"
+        }else{
+            string =  ""
+        }
+        p.innerHTML = string;
+        //p.setAttribute("class", "tooltip")
+        /*p.setAttribute("style", "position: relative;display: inline-block;border-bottom: 1px dotted black;")
+        var span = document.createElement("span");
+        span.setAttribute("class", "tooltiptext")
+        span.innerHTML='We currently have <i id="totalPlayer">...</i> players registered in our database.</i> In order to be in our COTD database, you must have participated in at least 1 main cup of the day and have qualified in the top 32 servers.'
+        p.appendChild(span)*/
         CreateTableFromJSON(json);
     });
 
 }
-
 
 function CreateTableFromJSON(json) {
 
@@ -263,6 +298,7 @@ function CreateTableFromJSON(json) {
 
         // CREATE DYNAMIC TABLE.
         var table = document.createElement("table");
+        table.setAttribute("style","width:80%; margin:auto;")
 
         // CREATE HTML TABLE HEADER ROW USING THE EXTRACTED HEADERS ABOVE.
 
@@ -271,12 +307,15 @@ function CreateTableFromJSON(json) {
         var tr = table.insertRow(-1);  
         var th = document.createElement("th");      // TABLE HEADER.
         th.innerHTML = "<i>Player name</i>";
+        th.setAttribute("style","width:20%; padding:1%;")
         tr.appendChild(th);
         var th = document.createElement("th");      // TABLE HEADER.
         th.innerHTML = "<i>Player ID</i>";
+        th.setAttribute("style","width:60%;")
         tr.appendChild(th);
         var th = document.createElement("th");      // TABLE HEADER.
         th.innerHTML = "<i>See profile</i>";
+        th.setAttribute("style","width:20%;")
         tr.appendChild(th);
         
         for (var i = 0; i < col.length; i++) {
@@ -297,8 +336,8 @@ function CreateTableFromJSON(json) {
             input.value = "see profile";
             input.setAttribute("class", "profileButton");
             
-
-            path = "seeProfile('"+json[col[i]]+"')"
+            response = json[col[i]]+ " " +col[i]
+            path = "seeProfile('"+response+"')"
             //console.log(path); 
             input.setAttribute("onclick", path);
             //input.onclick = seeProfile(json[col[i]]);
@@ -312,13 +351,27 @@ function CreateTableFromJSON(json) {
 
         // FINALLY ADD THE NEWLY CREATED TABLE WITH JSON DATA TO A CONTAINER.
         var divContainer = document.getElementById("showData");
-        divContainer.innerHTML = "";
-        divContainer.appendChild(table);
+
+        if (col.length != 0){
+            divContainer.innerHTML = "";
+            divContainer.appendChild(table);
+        }else{
+            divContainer.setAttribute("style","text-align:center;")
+            $.getJSON('https://trackmaniastats.herokuapp.com/api/totalPlayer', function(json) {
+                divContainer.innerHTML = '<h3>Sorry there is no player related to your search.</h3><br><p><i>We currently have <i id="totalPlayer">'+json.totalPlayer+'</i> players registered in our database.</i> In order to be in our COTD database, players must have participated in at least 1 main cup of the day and have qualified in the top 32 servers. </p>';
+
+            });
+            
+        }
+        
     }
 
 
 
-function seeProfile(playerID){
+function seeProfile(playerinfo){
+    playerID = playerinfo.slice(0,36)
+    playerName = playerinfo.slice(37,playerinfo.length)
+    //console.log(playerName)
 URL = "https://trackmaniastats.herokuapp.com/api/playerProfiles/"+playerID
 
 $.getJSON(URL, function(json) {
@@ -328,7 +381,7 @@ name = json.playerNames[json.playerNames.length - 1].playerName
 if (document.getElementById(playerID) == null){
 
         var playerdiv = document.createElement("div")
-        playerdiv.setAttribute("id", playerID);
+        playerdiv.setAttribute("id", playerName);
         playerdiv.setAttribute("class", 'players');
 
         var p = document.createElement("p")
@@ -348,7 +401,7 @@ if (document.getElementById(playerID) == null){
         
         var h3 = document.createElement("h3")
         h3.setAttribute("style", "font-weight:bold; text-align:center; text-decoration:underline; padding:100px;");
-        text = '<a target="_blank" style="font-weight:bold; text-decoration:underline" href="https://trackmania.io/#/player/' + playerID +'">'+ name+'</a>'+"'s profile"
+        text = '<a target="_blank" style="font-weight:bold; text-decoration:underline" href="https://trackmania.io/#/player/' + playerID +'">'+ playerName+'</a>'+"'s profile"
         h3.setAttribute("style", "text-align:center;");
         h3.innerHTML = text
 
@@ -364,7 +417,7 @@ if (document.getElementById(playerID) == null){
         playerdiv.appendChild(p)
 */
         var h4 = document.createElement("h5")
-        h4.innerHTML ="Pseudo history:"
+        h4.innerHTML ="Pseudo history :"
         h4.setAttribute("style", "text-align:center;");
         //$(document.getElementById("playerProfile").appendChild(h4))
         playerdiv.appendChild(h4)
@@ -564,13 +617,20 @@ var td = document.createElement("td");      // TABLE HEADER.
         //curentLocation = window.location.href 
         //newLocation = curentLocation + "#"+name
 
-        path = "#"+playerID
+        path = "#"+playerName
         //path = curentLocation + "#"+name
         //oldPath = window.location.href
 
 
         window.location.href = path;
         //window.location.href = oldPath + path ;
+
+        path = "#/playerprofile/"+playerName
+        //path = curentLocation + "#"+name
+        //oldPath = window.location.href
+
+
+        window.location.href = path;
 
 
         showGraphs(playerID,playerID)
@@ -1001,4 +1061,21 @@ var nbOpenFunFacts = 0;
 
 
 */
+/*
+function forceKeyPressUppercase(e)
+  {
+    var charInput = e.keyCode;
+    if((charInput >= 97) && (charInput <= 122)) { // lowercase
+      if(!e.ctrlKey && !e.metaKey && !e.altKey) { // no modifier key
+        var newChar = charInput - 32;
+        var start = e.target.selectionStart;
+        var end = e.target.selectionEnd;
+        e.target.value = e.target.value.substring(0, start) + String.fromCharCode(newChar) + e.target.value.substring(end);
+        e.target.setSelectionRange(start+1, start+1);
+        e.preventDefault();
+      }
+    }
+  }
 
+  document.getElementById("player").addEventListener("keypress", forceKeyPressUppercase, false);
+  */

@@ -19,6 +19,66 @@
 </script>
     -->
     <style type="text/css">
+    .form__group {
+   position: relative;
+   padding: 15px 0 0;
+   margin-top: 10px;
+   width: 50%;
+}
+ .player {
+   font-family: inherit;
+   width: 100%;
+   border: 0;
+   border-bottom: 3px solid #11998e;
+   outline: 0;
+   font-size: 1.3rem;
+   color: #000;
+   padding: 7px 0;
+   background: transparent;
+   transition: border-color 0.2s;
+}
+ .player::placeholder {
+   color: transparent;
+}
+ .player:placeholder-shown ~ .form__label {
+   font-size: 1.3rem;
+   cursor: text;
+   top: 20px;
+}
+ .form__label {
+   position: absolute;
+   top: 0;
+   display: block;
+   transition: 0.2s;
+   font-size: 1rem;
+   color: #11998e;
+}
+ .player:focus {
+   padding-bottom: 6px;
+   margin-bottom: 5px;
+   font-weight: 700;
+   border-width: 3px;
+   border-image: linear-gradient(to right, #11998e, #38ef7d);
+   border-image-slice: 1;
+}
+ .player:focus ~ .form__label {
+   position: absolute;
+   top: 0;
+   display: block;
+   transition: 0.2s;
+   font-size: 1rem;
+   color: #11998e;
+   font-weight: 700;
+}
+/* reset input */
+ .player:required, .player:invalid {
+   box-shadow: none;
+}
+ input {
+   text-align: center;
+}
+ 
+ 
         html, 
 body {
     height: 100%;
@@ -30,7 +90,7 @@ section {
   background-color:#c2cad0;
   text-align: justify;
   margin-top: 30px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   padding: 25px;
 }
 
@@ -38,6 +98,7 @@ h1 {
     text-align:center;
     margin: 19px;
     color: white;
+    font-size: 300%;
     font-style: bold;
 }
 
@@ -245,6 +306,11 @@ h2 {
   transition: max-height 0.2s ease-out;
   background-color:#c2cad0;
 }
+input { 
+    text-align: center; 
+}
+
+
     </style>
 
     <script src="js/canvasjs.min.js"></script>
@@ -255,7 +321,7 @@ h2 {
 <body>
     <div style="text-align: center;">
 
-    <h1>Welcome to TrackmaniaStats</h1>
+    <h1 >Welcome to TrackmaniaStats</h1>
     <i style="color: white; text-align: center;">Updated daily at 20:00 CET (<i id="dayLastAddedCOTD">Booting... please wait 15s</i>)</i>
     </div>
 
@@ -294,15 +360,19 @@ h2 {
 
 
     <section id ="playerSearch">
-    <h2>Search for a player:</h2>
-    <p><i>In order to be in our COTD database, you must have participated in at least 1 Cup of the Day. We currently have <i id="totalPlayer">...</i> players registered in our database.</i></p>
+    
+    
+      <div class="form__group" style="width:100%; display:table">
+    <form action="console.log('cool')">
 
-    <form action="">
-      <label for="player">Player name:</label>
-      <input type="text" id="player" class="player" name="player" class="searchPlayer">
-      <input type="button" value="Search" onclick="searchPlayer()">
+      <input autocomplete="off" type="input" id="player" class="player" name="player" class="searchPlayer" placeholder="Put for a player Ubisoft username" style="display:table-cell; width:100%">
+      <label for="player" class="form__label">Find a player :</label>
+      
+      <input style="display: none;"  id="playerBtn" type="button" value="Search" onclick="searchPlayer()">
       <br>
+      
     </form> 
+
 
     <p id="numberofresult"></p>
 
@@ -318,7 +388,7 @@ h2 {
 
     <section id ="Notes">
         <h2>Notes:</h2>
-        <p>Only the main COTD (at 7pm CEST) is taken into account. And only the first 32 servers of COTD (top 2048 players) are fetched, as servers after that are not available on trackmania.io :(</p>
+              <p>Only the main COTD (at 7pm CEST) is taken into account. And only the first 32 servers of COTD (top 2048 players) are fetched, as servers after that are not available on trackmania.io :(</p>
         <p>Pseudo were first tracked the 9th of feb. 2021, so logins before that are not available (Also keep in mind that, if you change your pseudo, it will only update if you play a new cotd). More things will eventually come (like A08 cup results). <i style="text-decoration: line-through">Or also, a graph visualisation (better than table...)</i> --> Added. </p>
         <p>If you have some request of things that you would like to see, you can contact me on Discord (see below)</p>
     </section>
