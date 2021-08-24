@@ -121,7 +121,7 @@ for (var oo=0; oo <= IDs.length; oo++){
 
 //setup before functions
 var typingTimer;                //timer identifier
-var doneTypingInterval = 50; //time in ms, 5 second for example
+var doneTypingInterval = 800; //time in ms, 5 second for example
 var $input = $('#player');
 
 //on keyup, start the countdown
